@@ -133,9 +133,9 @@ app.initializers.add('askvortsov/flarum-categories', function () {
         key: "askvortsov-categories.keep-tags-nav",
         required: true
       }, app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')), m(BooleanItem, {
-        key: "askvortsov-categories.keep-widgets",
+        key: "askvortsov-categories.full-page-desktop",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.keep_widgets')), m(BooleanItem, {
+      }, app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop')), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-icon",
         required: true
       }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')), m(BooleanItem, {

@@ -19,7 +19,7 @@ export default class CategoriesPage extends TagsPage {
     app.history.push('categories', app.translator.trans('askvortsov-category.forum.header.back_to_categories_tooltip'));
 
     extend(IndexPage.prototype, 'sidebarItems', function (items) {
-      if (app.current instanceof CategoriesPage && !app.forum.attribute('categories.keepWidgets')) {
+      if (app.current instanceof CategoriesPage && app.forum.attribute('categories.fullPageDesktop')) {
         for (const item in items.items) {
           console.log(item)
           if (item != 'newDiscussion' && item != 'nav') {
@@ -35,30 +35,33 @@ export default class CategoriesPage extends TagsPage {
     const pinned = this.tags.filter(tag => tag.position() !== null);
     const cloud = this.tags.filter(tag => tag.position() === null);
 
+    const classes = app.forum.attribute('categories.fullPageDesktop') ? ['CategoriesPage', 'TagsPage'] : ['CategoriesPage'];
 
     return (
-      <div className="CategoriesPage TagsPage">
+      <div className={classes.join(' ')}>
         {IndexPage.prototype.hero()}
         <div className="container">
-          <nav className="CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav" config={IndexPage.prototype.affixSidebar}>
-            <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
-          </nav>
+          <div className={app.forum.attribute('categories.fullPageDesktop') ? '' : 'sideNavContainer'}>
+            <nav className="CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav" config={IndexPage.prototype.affixSidebar}>
+              <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
+            </nav>
 
-          <div className="CategoriesPage-content sideNavOffset">
-            <ol className="TagCategoryList">
-              {pinned.map(tag => {
-                return (Category.component({ tag }));
-              })}
-            </ol>
+            <div className="CategoriesPage-content sideNavOffset">
+              <ol className="TagCategoryList">
+                {pinned.map(tag => {
+                  return (Category.component({ tag }));
+                })}
+              </ol>
 
-            {cloud.length ? (
-              <div className="TagCloud">
-                {cloud.map(tag => [
-                  tagLabel(tag, { link: true }),
-                  ' ',
-                ])}
-              </div>
-            ) : ''}
+              {cloud.length ? (
+                <div className="TagCloud">
+                  {cloud.map(tag => [
+                    tagLabel(tag, { link: true }),
+                    ' ',
+                  ])}
+                </div>
+              ) : ''}
+            </div>
           </div>
         </div>
       </div>

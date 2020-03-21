@@ -174,7 +174,7 @@ var CategoriesPage = /*#__PURE__*/function (_TagsPage) {
     }));
     app.history.push('categories', app.translator.trans('askvortsov-category.forum.header.back_to_categories_tooltip'));
     Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'sidebarItems', function (items) {
-      if (app.current instanceof CategoriesPage && !app.forum.attribute('categories.keepWidgets')) {
+      if (app.current instanceof CategoriesPage && app.forum.attribute('categories.fullPageDesktop')) {
         for (var item in items.items) {
           console.log(item);
 
@@ -195,10 +195,13 @@ var CategoriesPage = /*#__PURE__*/function (_TagsPage) {
     var cloud = this.tags.filter(function (tag) {
       return tag.position() === null;
     });
+    var classes = app.forum.attribute('categories.fullPageDesktop') ? ['CategoriesPage', 'TagsPage'] : ['CategoriesPage'];
     return m("div", {
-      className: "CategoriesPage TagsPage"
+      className: classes.join(' ')
     }, flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_3___default.a.prototype.hero(), m("div", {
       className: "container"
+    }, m("div", {
+      className: app.forum.attribute('categories.fullPageDesktop') ? '' : 'sideNavContainer'
     }, m("nav", {
       className: "CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav",
       config: flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_3___default.a.prototype.affixSidebar
@@ -216,7 +219,7 @@ var CategoriesPage = /*#__PURE__*/function (_TagsPage) {
       return [flarum_tags_helpers_tagLabel__WEBPACK_IMPORTED_MODULE_7___default()(tag, {
         link: true
       }), ' '];
-    })) : '')));
+    })) : ''))));
   };
 
   _proto.config = function config() {

@@ -27,7 +27,7 @@ export default class LastDiscussionWidget extends Component {
                         {truncate(discussion.title(), 26)}
                     </div>
                     <div class="LastDiscussion-bottomRow">
-                        {humanTime(discussion.createdAt())} |  {username(discussion.lastPostedUser())}
+                        {humanTime(discussion.lastPostedAt())} |  {username(discussion.lastPostedUser())}
                     </div>
                 </div>
             </a>

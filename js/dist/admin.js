@@ -112,6 +112,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fof-components */ "@fof-components");
 /* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_fof_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/BasicsPage */ "flarum/components/BasicsPage");
+/* harmony import */ var flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 var SettingsModal = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].SettingsModal,
     _settings$items = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].items,
@@ -141,6 +147,13 @@ app.initializers.add('askvortsov/flarum-categories', function () {
       }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion'))]
     }));
   };
+
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_BasicsPage__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'homePageItems', function (items) {
+    items.add('categories', {
+      path: '/categories',
+      label: app.translator.trans('askvortsov-categories.admin.basics.categories_label')
+    });
+  });
 });
 
 /***/ }),
@@ -153,6 +166,28 @@ app.initializers.add('askvortsov/flarum-categories', function () {
 /***/ (function(module, exports) {
 
 module.exports = flarum.extensions['fof-components'];
+
+/***/ }),
+
+/***/ "flarum/components/BasicsPage":
+/*!**************************************************************!*\
+  !*** external "flarum.core.compat['components/BasicsPage']" ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['components/BasicsPage'];
+
+/***/ }),
+
+/***/ "flarum/extend":
+/*!***********************************************!*\
+  !*** external "flarum.core.compat['extend']" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['extend'];
 
 /***/ })
 

@@ -1,4 +1,6 @@
 import { settings } from '@fof-components';
+import { extend } from 'flarum/extend';
+import BasicsPage from 'flarum/components/BasicsPage';
 
 const {
     SettingsModal,
@@ -30,4 +32,10 @@ app.initializers.add('askvortsov/flarum-categories', () => {
                 ],
             })
         );
+    extend(BasicsPage.prototype, 'homePageItems', items => {
+        items.add('categories', {
+            path: '/categories',
+            label: app.translator.trans('askvortsov-categories.admin.basics.categories_label')
+        });
+    });
 });

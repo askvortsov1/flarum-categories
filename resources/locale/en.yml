@@ -1,5 +1,7 @@
 askvortsov-categories:
   admin:
+    basics:
+      categories_label: Categories
     labels:
       keep_tags_nav: Don't remove the tags page link from the nav sidebar
       parent_remove_icon: Don't display icons for top-level tags on the categories page

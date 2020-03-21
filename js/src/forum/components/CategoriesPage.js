@@ -1,3 +1,4 @@
+import Page from 'flarum/components/Page';
 import IndexPage from 'flarum/components/IndexPage';
 import listItems from 'flarum/helpers/listItems';
 import humanTime from 'flarum/helpers/humanTime';
@@ -10,7 +11,7 @@ import Category from './Category';
 
 export default class CategoriesPage extends TagsPage {
   init() {
-    super.init();
+    Page.prototype.init.call(this);
 
     this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
 

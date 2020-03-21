@@ -2,7 +2,17 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/askvortsov/flarum-categories.svg)](https://packagist.org/packages/askvortsov/flarum-categories)
 
-A [Flarum](http://flarum.org) extension. Traditional Category Layout for Flarum
+A [Flarum](http://flarum.org) extension. Ever wanted a traditional categories page for Flarum? Well, now you have it!
+
+On Desktop
+https://i.imgur.com/oAOusDE.png
+
+On Mobile
+https://i.imgur.com/HA1DwwC.png
+
+Take a look at a site running it at:
+https://forum.youthneuro.org
+
 
 ### Installation
 

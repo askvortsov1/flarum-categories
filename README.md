@@ -31,3 +31,4 @@ composer update askvortsov/flarum-categories
 ### Links
 
 - [Packagist](https://packagist.org/packages/askvortsov/flarum-categories)
+- [Github](https://github.com/askvortsov1/flarum-categories)

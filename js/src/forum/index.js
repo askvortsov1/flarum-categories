@@ -18,6 +18,6 @@ app.initializers.add('askvortsov/flarum-categories', () => {
       icon: 'fas fa-th-list',
       children: app.translator.trans('askvortsov-categories.forum.index.categories_link'),
       href: app.route('categories')
-    }), -9);
+    }), -9.5);
   });
 });

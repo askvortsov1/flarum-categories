@@ -24,7 +24,8 @@ class AddTagAttributes
     public function addpostCount(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
-            $event->attributes['postCount'] = $event->model->discussions->sum('comment_count');
+            $event->attributes['discussionCount'] = $event->model->discussions()->where('hidden_at', null)->where('is_private', false)->count();
+            $event->attributes['postCount'] = $event->model->discussions()->where('hidden_at', null)->where('is_private', false)->sum('comment_count');
         }
     }
 

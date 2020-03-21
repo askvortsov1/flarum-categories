@@ -54,7 +54,11 @@ export default class CategoriesPage extends TagsPage {
   config(...args) {
     super.config(...args);
 
-    app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
+    if (m.route() != "/") {
+      app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
+    } else {
+      app.setTitle('');
+    }
     app.setTitleCount(0);
   }
 }

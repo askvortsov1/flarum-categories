@@ -210,7 +210,12 @@ var CategoriesPage = /*#__PURE__*/function (_TagsPage) {
 
     (_TagsPage$prototype$c = _TagsPage.prototype.config).call.apply(_TagsPage$prototype$c, [this].concat(args));
 
-    app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
+    if (m.route() != "/") {
+      app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
+    } else {
+      app.setTitle('');
+    }
+
     app.setTitleCount(0);
   };
 

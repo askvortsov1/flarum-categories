@@ -3,11 +3,11 @@ askvortsov-categories:
     basics:
       categories_label: Categories
     labels:
-      keep_tags_nav: Don't remove the tags page link from the nav sidebar
-      parent_remove_icon: Don't display icons for top-level tags on the categories page
-      parent_remove_description: Don't display discussions for top-level tags on the categories page
-      parent_remove_stats: Don't display stats for top-level tags on the categories page
-      parent_remove_last_discussion: Don't display most recent discussions for top-level tags on the categories page
+      keep_tags_nav: Keep the tags page link in the nav sidebar?
+      parent_remove_icon: Hide icons for top-level tags?
+      parent_remove_description: Hide descriptions for top-level tags?
+      parent_remove_stats: Hide stats for top-level tags?
+      parent_remove_last_discussion: Hide most recent discussions for top-level tags?
     title: Categories Settings
   forum:
     categories:

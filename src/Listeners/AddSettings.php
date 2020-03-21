@@ -25,6 +25,7 @@ class AddSettings
     {
         if ($event->isSerializer(ForumSerializer::class)) {
             $event->attributes['categories.keepTagsNav'] = (bool) $this->settings->get('askvortsov-categories.keep-tags-nav');
+            $event->attributes['categories.keepWidgets'] = (bool) $this->settings->get('askvortsov-categories.keep-widgets');
             $event->attributes['categories.parentRemoveIcon'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-icon');
             $event->attributes['categories.parentRemoveDescription'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-description');
             $event->attributes['categories.parentRemoveStats'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-stats');

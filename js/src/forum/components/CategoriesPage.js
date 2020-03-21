@@ -1,3 +1,4 @@
+import { extend } from 'flarum/extend';
 import Page from 'flarum/components/Page';
 import IndexPage from 'flarum/components/IndexPage';
 import listItems from 'flarum/helpers/listItems';
@@ -16,6 +17,18 @@ export default class CategoriesPage extends TagsPage {
     this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
 
     app.history.push('categories', app.translator.trans('askvortsov-category.forum.header.back_to_categories_tooltip'));
+
+    extend(IndexPage.prototype, 'sidebarItems', function (items) {
+      if (app.current instanceof CategoriesPage && !app.forum.attribute('categories.keepWidgets')) {
+        for (const item in items.items) {
+          console.log(item)
+          if (item != 'newDiscussion' && item != 'nav') {
+            items.remove(item);
+          }
+        }
+      }
+      return items;
+    });
   }
 
   view() {
@@ -34,14 +47,14 @@ export default class CategoriesPage extends TagsPage {
           <div className="CategoriesPage-content sideNavOffset">
             <ol className="TagCategoryList">
               {pinned.map(tag => {
-                return (Category.component({tag}));
+                return (Category.component({ tag }));
               })}
             </ol>
 
             {cloud.length ? (
               <div className="TagCloud">
                 {cloud.map(tag => [
-                  tagLabel(tag, {link: true}),
+                  tagLabel(tag, { link: true }),
                   ' ',
                 ])}
               </div>

@@ -4,6 +4,7 @@ askvortsov-categories:
       categories_label: Categories
     labels:
       keep_tags_nav: Keep the tags page link in the nav sidebar?
+      keep_widgets: Keep widgets (such as Friends of Flarum Forum Statistics) in the navbar on the categories page?
       parent_remove_icon: Hide icons for top-level tags?
       parent_remove_description: Hide descriptions for top-level tags?
       parent_remove_stats: Hide stats for top-level tags?

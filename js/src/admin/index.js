@@ -17,6 +17,9 @@ app.initializers.add('askvortsov/flarum-categories', () => {
                     <BooleanItem key="askvortsov-categories.keep-tags-nav" required>
                         {app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')}
                     </BooleanItem>,
+                    <BooleanItem key="askvortsov-categories.keep-widgets" required>
+                        {app.translator.trans('askvortsov-categories.admin.labels.keep_widgets')}
+                    </BooleanItem>,
                     <BooleanItem key="askvortsov-categories.parent-remove-icon" required>
                         {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')}
                     </BooleanItem>,

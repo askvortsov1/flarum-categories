@@ -133,6 +133,9 @@ app.initializers.add('askvortsov/flarum-categories', function () {
         key: "askvortsov-categories.keep-tags-nav",
         required: true
       }, app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')), m(BooleanItem, {
+        key: "askvortsov-categories.keep-widgets",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.keep_widgets')), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-icon",
         required: true
       }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')), m(BooleanItem, {

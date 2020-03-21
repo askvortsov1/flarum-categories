@@ -8,7 +8,7 @@ import CategoriesPage from './components/CategoriesPage';
 app.initializers.add('askvortsov/flarum-categories', () => {
   app.routes.categories = { path: '/categories', component: CategoriesPage.component() };
 
-  Tag.prototype.commentCount = Model.attribute('commentCount');
+  Tag.prototype.postCount = Model.attribute('postCount');
 
   extend(IndexPage.prototype, 'navItems', function (items) {
     if (items.has('tags') && !app.forum.attribute('categories.keepTagsNav')) {

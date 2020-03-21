@@ -14,17 +14,17 @@ class AddTagAttributes
 
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(Serializing::class, [$this, 'addCommentCount']);
+        $events->listen(Serializing::class, [$this, 'addpostCount']);
         $events->listen(WillGetData::class, [$this, 'includeRelationships']);
     }
 
     /**
      * @param Serializing $event
      */
-    public function addCommentCount(Serializing $event)
+    public function addpostCount(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
-            $event->attributes['commentCount'] = $event->model->discussions->sum('comment_count') - $event->attributes['discussionCount'];
+            $event->attributes['postCount'] = $event->model->discussions->sum('comment_count');
         }
     }
 

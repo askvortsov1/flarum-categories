@@ -353,7 +353,7 @@ var Category = /*#__PURE__*/function (_Component) {
         label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label')
       }), 15);
       items.add('postCount', _StatWidget__WEBPACK_IMPORTED_MODULE_5__["default"].component({
-        count: this.tag.commentCount(),
+        count: this.tag.postCount(),
         label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label')
       }), 10);
     }
@@ -521,7 +521,7 @@ app.initializers.add('askvortsov/flarum-categories', function () {
     path: '/categories',
     component: _components_CategoriesPage__WEBPACK_IMPORTED_MODULE_5__["default"].component()
   };
-  flarum_tags_models_Tag__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.commentCount = flarum_Model__WEBPACK_IMPORTED_MODULE_3___default.a.attribute('commentCount');
+  flarum_tags_models_Tag__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.postCount = flarum_Model__WEBPACK_IMPORTED_MODULE_3___default.a.attribute('postCount');
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'navItems', function (items) {
     if (items.has('tags') && !app.forum.attribute('categories.keepTagsNav')) {
       items.remove('tags');

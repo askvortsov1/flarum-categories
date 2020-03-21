@@ -96,7 +96,7 @@ export default class Category extends Component {
             }), 15)
 
             items.add('postCount', StatWidget.component({
-                count: this.tag.commentCount(),
+                count: this.tag.postCount(),
                 label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label')
             }), 10)
         }

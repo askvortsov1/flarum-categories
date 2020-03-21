@@ -13,5 +13,5 @@ app.initializers.add('askvortsov/flarum-categories', function () {
     path: '/categories',
     component: _CategoriesPage["default"].component()
   };
-  _Tag["default"].prototype.commentCount = _Model["default"].attribute('commentCount');
+  _Tag["default"].prototype.postCount = _Model["default"].attribute('postCount');
 });

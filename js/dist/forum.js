@@ -436,7 +436,7 @@ var LastDiscussionWidget = /*#__PURE__*/function (_Component) {
       "class": "LastDiscussion-content"
     }, m("div", {
       "class": "LastDiscussion-topRow"
-    }, Object(flarum_utils_string__WEBPACK_IMPORTED_MODULE_5__["truncate"])(discussion.title(), 80)), m("div", {
+    }, Object(flarum_utils_string__WEBPACK_IMPORTED_MODULE_5__["truncate"])(discussion.title(), 26)), m("div", {
       "class": "LastDiscussion-bottomRow"
     }, flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_4___default()(discussion.createdAt()), " |  ", discussion.lastPostedUser().displayName())));
   };

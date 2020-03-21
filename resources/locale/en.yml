@@ -1,0 +1,6 @@
+askvortsov-categories:
+  forum:
+    categories:
+    stat-widgets:
+      discussion_label: Discussions
+      post_label: Posts

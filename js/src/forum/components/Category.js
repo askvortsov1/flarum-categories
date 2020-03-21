@@ -64,7 +64,7 @@ export default class Category extends Component {
                     <i class="fa fa-circle fa-stack-2x icon-background" style={{ color: this.tag.color() }}></i>
                     {icon(this.tag.icon(), { className: 'fa-stack-1x CategoryIcon' })}
                 </span>, 10);
-        } else if (this.tag.icon()) {
+        } else if (this.tag.icon() && !app.forum.attribute('categories.parentRemoveIcon')) {
             items.add('icon',
                 <span class="fa-stack fa-3x">
                     {icon(this.tag.icon(), { className: 'fa-stack-1x CategoryIcon' })}
@@ -79,7 +79,7 @@ export default class Category extends Component {
 
         items.add('name', <h4 class="TagCategory-name">{this.tag.name()}</h4>, 15)
 
-        if (this.tag.description()) {
+        if (this.tag.description() && (this.isChild || !app.forum.attribute('categories.parentRemoveDescription'))) {
             items.add('description', <div class="TagCategory-description">{this.tag.description()}</div>, 10)
         }
 
@@ -89,15 +89,17 @@ export default class Category extends Component {
     statItems() {
         const items = new ItemList;
 
-        items.add('discussionCount', StatWidget.component({
-            count: this.tag.discussionCount(),
-            label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label')
-        }), 15)
+        if (this.isChild || !app.forum.attribute('categories.parentRemoveStats')) {
+            items.add('discussionCount', StatWidget.component({
+                count: this.tag.discussionCount(),
+                label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label')
+            }), 15)
 
-        items.add('postCount', StatWidget.component({
-            count: this.tag.commentCount(),
-            label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label')
-        }), 10)
+            items.add('postCount', StatWidget.component({
+                count: this.tag.commentCount(),
+                label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label')
+            }), 10)
+        }
 
         return items;
     }
@@ -105,9 +107,11 @@ export default class Category extends Component {
     lastDiscussionItems() {
         const items = new ItemList;
 
-        items.add('lastDiscussion', LastDiscussionWidget.component({
-            discussion: this.tag.lastPostedDiscussion()
-        }), 10);
+        if (this.isChild || !app.forum.attribute('categories.parentRemoveLastDiscussion')) {
+            items.add('lastDiscussion', LastDiscussionWidget.component({
+                discussion: this.tag.lastPostedDiscussion()
+            }), 10);
+        }
 
         return items;
     }

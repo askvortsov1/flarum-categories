@@ -91,15 +91,13 @@ module.exports =
 /*!******************!*\
   !*** ./admin.js ***!
   \******************/
-/*! no static exports found */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_admin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/admin */ "./src/admin/index.js");
-/* harmony import */ var _src_admin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_admin__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _src_admin__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _src_admin__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
+/* empty/unused harmony star reexport */
 
 /***/ }),
 
@@ -107,10 +105,54 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************!*\
   !*** ./src/admin/index.js ***!
   \****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fof-components */ "@fof-components");
+/* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_fof_components__WEBPACK_IMPORTED_MODULE_0__);
+
+var SettingsModal = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].SettingsModal,
+    _settings$items = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].items,
+    BooleanItem = _settings$items.BooleanItem,
+    SelectItem = _settings$items.SelectItem,
+    StringItem = _settings$items.StringItem;
+app.initializers.add('askvortsov/flarum-categories', function () {
+  app.extensionSettings['askvortsov-categories'] = function () {
+    return app.modal.show(new SettingsModal({
+      title: app.translator.trans('askvortsov-categories.admin.title'),
+      type: 'small',
+      items: [m(BooleanItem, {
+        key: "askvortsov-categories.keep-tags-nav",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')), m(BooleanItem, {
+        key: "askvortsov-categories.parent-remove-icon",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')), m(BooleanItem, {
+        key: "askvortsov-categories.parent-remove-description",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_description')), m(BooleanItem, {
+        key: "askvortsov-categories.parent-remove-stats",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_stats')), m(BooleanItem, {
+        key: "askvortsov-categories.parent-remove-last-discussion",
+        required: true
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion'))]
+    }));
+  };
+});
+
+/***/ }),
+
+/***/ "@fof-components":
+/*!******************************************************!*\
+  !*** external "flarum.extensions['fof-components']" ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-app.initializers.add('askvortsov/flarum-categories', function () {});
+module.exports = flarum.extensions['fof-components'];
 
 /***/ })
 

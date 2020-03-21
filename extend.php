@@ -24,6 +24,7 @@ return [
         ->css(__DIR__.'/resources/less/admin.less'),
     function (Dispatcher $events) {
         $events->subscribe(Listeners\AddTagAttributes::class);
+        $events->subscribe(Listeners\AddSettings::class);
     },
     new Extend\Locales(__DIR__ . '/resources/locale')
 ];

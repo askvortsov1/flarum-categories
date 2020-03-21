@@ -1,6 +1,18 @@
 askvortsov-categories:
+  admin:
+    labels:
+      keep_tags_nav: Don't remove the tags page link from the nav sidebar
+      parent_remove_icon: Don't display icons for top-level tags on the categories page
+      parent_remove_description: Don't display discussions for top-level tags on the categories page
+      parent_remove_stats: Don't display stats for top-level tags on the categories page
+      parent_remove_last_discussion: Don't display most recent discussions for top-level tags on the categories page
+    title: Categories Settings
   forum:
     categories:
+    header:
+      back_to_categories_tooltip: Back to Categories
+    index:
+      categories_link: Categories
     stat-widgets:
       discussion_label: Discussions
       post_label: Posts

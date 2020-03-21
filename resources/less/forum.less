@@ -22,7 +22,6 @@
     .TagCategory-stats,
     .TagCategory-lastDiscussion {
       display: flex;
-      padding: 0 15px;
     }
 
     .TagCategory-icon,
@@ -172,7 +171,7 @@
   .TagCategory-lastDiscussion {
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     margin-top: 10px;
-    padding-top: 10px;
+    padding: 7px 0;
   }
 
   .LastDiscussion-avatar {
@@ -186,6 +185,12 @@
   .LastDiscussion-topRow {
     margin-right: 15px;
   }
+
+  .TagCategory-icon,
+    .TagCategory-main,
+    .TagCategory-stats {
+      padding: 0 15px 0 0px;
+    }
 }
 
 @media @tablet-up {
@@ -211,7 +216,7 @@
   .TagCategory-lastDiscussion {
     border-top: none;
     margin-top: 0;
-    padding-top: 0;
+    padding: 0 15px;
   }
 
   .LastDiscussion-avatar {
@@ -222,4 +227,10 @@
   .LastDiscussion-content {
     flex-direction: column;
   }
+
+  .TagCategory-icon,
+    .TagCategory-main,
+    .TagCategory-stats {
+      padding: 0 15px;
+    }
 }

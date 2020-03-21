@@ -275,6 +275,7 @@ var Category = /*#__PURE__*/function (_Component) {
       backgroundColor: tag.color()
     };
     var classNames = (this.isChild ? ['TagCategory SubCategory'] : ['TagCategory']).join(' ');
+    var lastDiscussionClassNames = (tag.lastPostedDiscussion() ? ['TagCategory-lastDiscussion'] : ['TagCategory-lastDiscussion empty']).join(' ');
     return m("li", {
       "class": classNames
     }, m("a", {
@@ -293,7 +294,7 @@ var Category = /*#__PURE__*/function (_Component) {
     }, m("div", {
       "class": "TagCategory-stats StatWidgetList"
     }, this.statItems().toArray()), m("div", {
-      "class": "TagCategory-lastDiscussion"
+      "class": lastDiscussionClassNames
     }, this.lastDiscussionItems().toArray()))), this.isChild ? '' : m("ol", {
       className: "TagCategory-subTagList"
     }, children.map(function (child) {
@@ -423,7 +424,7 @@ var LastDiscussionWidget = /*#__PURE__*/function (_Component) {
     if (!discussion) {
       return m("div", {
         "class": "LastDiscussion"
-      }, "No Discussions Yet!");
+      }, app.translator.trans('askvortsov-categories.forum.last_discussion_widget.no_discussions'));
     }
 
     return m("a", {

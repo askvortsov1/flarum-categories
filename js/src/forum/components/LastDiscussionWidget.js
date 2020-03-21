@@ -12,7 +12,7 @@ export default class LastDiscussionWidget extends Component {
         if (!discussion) {
             return (
                 <div class="LastDiscussion">
-                    No Discussions Yet!
+                    {app.translator.trans('askvortsov-categories.forum.last_discussion_widget.no_discussions')}
                 </div>
             );
         }

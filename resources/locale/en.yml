@@ -16,3 +16,5 @@ askvortsov-categories:
     stat-widgets:
       discussion_label: Discussions
       post_label: Posts
+    last_discussion_widget:
+      no_discussions: No Discussions (Yet!)

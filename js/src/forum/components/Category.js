@@ -25,6 +25,8 @@ export default class Category extends Component {
 
         const classNames = (this.isChild ? ['TagCategory SubCategory'] : ['TagCategory']).join(' ');
 
+        const lastDiscussionClassNames = (tag.lastPostedDiscussion() ? ['TagCategory-lastDiscussion'] : ['TagCategory-lastDiscussion empty']).join(' ');
+
         return (
             <li class={classNames}>
                 <a class="TagCategory-content" style={cardStyle} href={app.route.tag(tag)} config={m.route}>
@@ -40,7 +42,7 @@ export default class Category extends Component {
                         <div class="TagCategory-stats StatWidgetList">
                             {this.statItems().toArray()}
                         </div>
-                        <div class="TagCategory-lastDiscussion">
+                        <div class={lastDiscussionClassNames}>
                             {this.lastDiscussionItems().toArray()}
                         </div>
                     </div>

@@ -53,8 +53,12 @@
   }
 }
 
-.TagCategoryList > .TagCategory {
-  margin-bottom: 30px;
+.TagCategoryList {
+  padding-left: 0;
+
+  > .TagCategory {
+    margin-bottom: 30px;
+  }
 }
 
 .TagCategory-subTagList {
@@ -156,9 +160,9 @@
 
   .TagCategory-alignEnd {
     flex-direction: column;
+    margin-top: 15px;
   }
   .TagCategory-alignStart {
-    margin-bottom: 15px;
   }
 
   .StatWidget {
@@ -187,10 +191,10 @@
   }
 
   .TagCategory-icon,
-    .TagCategory-main,
-    .TagCategory-stats {
-      padding: 0 15px 0 0px;
-    }
+  .TagCategory-main,
+  .TagCategory-stats {
+    padding: 0 15px 0 0px;
+  }
 }
 
 @media @tablet-up {
@@ -229,8 +233,8 @@
   }
 
   .TagCategory-icon,
-    .TagCategory-main,
-    .TagCategory-stats {
-      padding: 0 15px;
-    }
+  .TagCategory-main,
+  .TagCategory-stats {
+    padding: 0 15px;
+  }
 }

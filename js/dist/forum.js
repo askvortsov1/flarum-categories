@@ -424,8 +424,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_helpers_avatar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_avatar__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/helpers/username */ "flarum/helpers/username");
 /* harmony import */ var flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/utils/humanTime */ "flarum/utils/humanTime");
-/* harmony import */ var flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/helpers/humanTime */ "flarum/helpers/humanTime");
+/* harmony import */ var flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var flarum_utils_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/utils/string */ "flarum/utils/string");
 /* harmony import */ var flarum_utils_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_string__WEBPACK_IMPORTED_MODULE_5__);
 
@@ -456,7 +456,7 @@ var LastDiscussionWidget = /*#__PURE__*/function (_Component) {
     return m("a", {
       "class": "LastDiscussion",
       href: app.route.discussion(discussion),
-      config: m.route
+      config: this.stopProp
     }, m("div", {
       "class": "LastDiscussion-avatar"
     }, flarum_helpers_avatar__WEBPACK_IMPORTED_MODULE_2___default()(discussion.lastPostedUser())), m("div", {
@@ -465,7 +465,15 @@ var LastDiscussionWidget = /*#__PURE__*/function (_Component) {
       "class": "LastDiscussion-topRow"
     }, Object(flarum_utils_string__WEBPACK_IMPORTED_MODULE_5__["truncate"])(discussion.title(), 26)), m("div", {
       "class": "LastDiscussion-bottomRow"
-    }, flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_4___default()(discussion.lastPostedAt()), " |  ", flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default()(discussion.lastPostedUser()))));
+    }, flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_4___default()(discussion.lastPostedAt()), " |  ", flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default()(discussion.lastPostedUser()))));
+  };
+
+  _proto.stopProp = function stopProp(element, isInitialized) {
+    if (isInitialized) return;
+    $(element).on('click', function (e) {
+      return e.stopPropagation();
+    });
+    m.route.apply(this, arguments);
   };
 
   return LastDiscussionWidget;
@@ -746,17 +754,6 @@ module.exports = flarum.core.compat['tags/utils/sortTags'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['utils/ItemList'];
-
-/***/ }),
-
-/***/ "flarum/utils/humanTime":
-/*!********************************************************!*\
-  !*** external "flarum.core.compat['utils/humanTime']" ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = flarum.core.compat['utils/humanTime'];
 
 /***/ }),
 

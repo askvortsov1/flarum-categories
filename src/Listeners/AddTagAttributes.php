@@ -5,8 +5,8 @@ namespace Askvortsov\FlarumCategories\Listeners;
 use Flarum\Api\Controller\ShowForumController;
 use Flarum\Api\Event\Serializing;
 use Flarum\Api\Event\WillGetData;
+use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Tags\Api\Serializer\TagSerializer;
-use Flarum\Tags\Api\Controller;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddTagAttributes
@@ -26,6 +26,9 @@ class AddTagAttributes
         if ($event->isSerializer(TagSerializer::class)) {
             $event->attributes['discussionCount'] = $event->model->discussions()->where('hidden_at', null)->where('is_private', false)->count();
             $event->attributes['postCount'] = $event->model->discussions()->where('hidden_at', null)->where('is_private', false)->sum('comment_count');
+        }
+        if ($event->isSerializer(BasicUserSerializer::class) && $event->actor->can('viewUserList')) {
+            $event->attributes['joinTime'] = $event->formatDate($event->model->joined_at);
         }
     }
 

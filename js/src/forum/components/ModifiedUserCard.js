@@ -24,6 +24,9 @@ import listItems from 'flarum/helpers/listItems';
 export default class ModifiedUserCard extends Component {
     view() {
         const user = this.props.user;
+
+        console.log(user.joinTime())
+        console.log(user)
         const controls = UserControls.controls(user, this).toArray();
         const color = user.color();
         const badges = user.badges().toArray();
@@ -93,7 +96,9 @@ export default class ModifiedUserCard extends Component {
             ));
         }
 
-        items.add('joined', app.translator.trans('core.forum.user.joined_date_text', { ago: humanTime(user.joinTime()) }));
+        if (user.joinTime()) {
+            items.add('joined', app.translator.trans('core.forum.user.joined_date_text', { ago: humanTime(user.joinTime()) }));
+        }
 
         return items;
     }

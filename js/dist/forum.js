@@ -617,6 +617,8 @@ var ModifiedUserCard = /*#__PURE__*/function (_Component) {
 
   _proto.view = function view() {
     var user = this.props.user;
+    console.log(user.joinTime());
+    console.log(user);
     var controls = flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_4___default.a.controls(user, this).toArray();
     var color = user.color();
     var badges = user.badges().toArray();
@@ -673,9 +675,12 @@ var ModifiedUserCard = /*#__PURE__*/function (_Component) {
       }, online ? [flarum_helpers_icon__WEBPACK_IMPORTED_MODULE_7___default()('fas fa-circle'), ' ', app.translator.trans('core.forum.user.online_text')] : [flarum_helpers_icon__WEBPACK_IMPORTED_MODULE_7___default()('far fa-clock'), ' ', flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_2___default()(lastSeenAt)]));
     }
 
-    items.add('joined', app.translator.trans('core.forum.user.joined_date_text', {
-      ago: flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_2___default()(user.joinTime())
-    }));
+    if (user.joinTime()) {
+      items.add('joined', app.translator.trans('core.forum.user.joined_date_text', {
+        ago: flarum_utils_humanTime__WEBPACK_IMPORTED_MODULE_2___default()(user.joinTime())
+      }));
+    }
+
     return items;
   };
 

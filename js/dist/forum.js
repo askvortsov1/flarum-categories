@@ -559,6 +559,15 @@ app.initializers.add('askvortsov/flarum-categories', function () {
       children: app.translator.trans('askvortsov-categories.forum.index.categories_link'),
       href: app.route('categories')
     }), -9.5);
+
+    if (items.has('moreTags')) {
+      items.replace('moreTags', flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_2___default.a.component({
+        children: app.translator.trans('flarum-tags.forum.index.more_link'),
+        href: app.route('categories')
+      }));
+    }
+
+    return items;
   });
 });
 

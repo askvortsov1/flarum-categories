@@ -1,7 +1,7 @@
 import Component from 'flarum/Component';
 import avatar from 'flarum/helpers/avatar';
 import username from 'flarum/helpers/username';
-import humanTime from 'flarum/utils/humanTime';
+import humanTime from 'flarum/helpers/humanTime';
 import { truncate } from 'flarum/utils/string';
 
 export default class LastDiscussionWidget extends Component {
@@ -18,7 +18,7 @@ export default class LastDiscussionWidget extends Component {
         }
 
         return (
-            <a class="LastDiscussion" href={app.route.discussion(discussion)} config={m.route}>
+            <a class="LastDiscussion" href={app.route.discussion(discussion)} config={this.stopProp}>
                 <div class="LastDiscussion-avatar">
                     {avatar(discussion.lastPostedUser())}
                 </div>
@@ -32,5 +32,11 @@ export default class LastDiscussionWidget extends Component {
                 </div>
             </a>
         );
+    }
+
+    stopProp(element, isInitialized) {
+        if (isInitialized) return;
+        $(element).on('click', e => e.stopPropagation());
+        m.route.apply(this, arguments);
     }
 }

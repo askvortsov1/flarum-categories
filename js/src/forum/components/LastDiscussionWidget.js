@@ -1,10 +1,9 @@
 import Component from 'flarum/Component';
-import UserCard from 'flarum/components/UserCard';
 import avatar from 'flarum/helpers/avatar';
 import username from 'flarum/helpers/username';
 import humanTime from 'flarum/helpers/humanTime';
-import extractText from 'flarum/utils/extractText';
 import { truncate } from 'flarum/utils/string';
+import ModifiedUserCard from './ModifiedUserCard';
 
 export default class LastDiscussionWidget extends Component {
     init() {
@@ -33,10 +32,10 @@ export default class LastDiscussionWidget extends Component {
         let card = '';
 
         if (user && this.cardVisible) {
-            card = UserCard.component({
+            card = ModifiedUserCard.component({
                 user,
                 className: 'UserCard--popover',
-                controlsButtonClassName: 'Button Button--icon Button--flat'
+                controlsButtonClassName: 'Button Button--icon Button--flat',
             });
         }
 

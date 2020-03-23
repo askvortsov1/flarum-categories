@@ -1,12 +1,19 @@
 // Variables
 
-@categories-color-white: #fff;
+@categories-color-white: darken(#fff, 2%);
 @categories-color-white-slightly-muted: darken(@categories-color-white, 5%);
 @categories-color-white-muted: darken(@categories-color-white, 11%);
 @categories-color-white-more-muted: darken(@categories-color-white, 25%);
 
 @categories-color-highlighted: @categories-color-white;
 @categories-color-muted: @categories-color-white-muted;
+
+// Dark colors (for nightmode workaround)
+@categories-sub-dark-color-background: lighten(#000, 20%);
+@categories-sub-dark-color-background-hover: lighten(#000, 30%);
+@categories-sub-dark-color-highlighted: darken(@categories-color-white, 5%);
+@categories-sub-dark-color-muted: darken(@categories-color-white, 11%);
+@categories-sub-dark-color-more-muted: darken(@categories-color-white, 25%);
 
 .define-colors(@config-dark-mode);
 .define-colors(false) {
@@ -20,11 +27,11 @@
   );
 }
 .define-colors(true) {
-  @categories-sub-color-background: lighten(#000, 20%);
-  @categories-sub-color-background-hover: lighten(#000, 30%);
-  @categories-sub-color-highlighted: darken(@categories-color-white, 5%);
-  @categories-sub-color-muted: darken(@categories-color-white, 11%);
-  @categories-sub-color-more-muted: darken(@categories-color-white, 25%);
+  @categories-sub-color-background: @categories-sub-dark-color-background;
+  @categories-sub-color-background-hover: @categories-sub-dark-color-background-hover;
+  @categories-sub-color-highlighted: @categories-sub-dark-color-highlighted;
+  @categories-sub-color-muted: @categories-sub-dark-color-muted;
+  @categories-sub-color-more-muted: @categories-sub-dark-color-more-muted;
 }
 
 // Systems
@@ -154,6 +161,10 @@
       border-right: none !important;
     }
 
+    .StatWidget-count {
+      font-weight: 550;
+    }
+
     .StatWidget-label {
       color: @categories-color-white-muted;
     }
@@ -168,6 +179,10 @@
   .StatWidget-label {
     color: @categories-sub-color-muted;
   }
+}
+
+.TagCategory-lastDiscussion.empty .LastDiscussion {
+  font-weight: 550;
 }
 
 .LastDiscussion {
@@ -218,6 +233,7 @@
 
   .LastDiscussion-topRow {
     color: @categories-color-white;
+    font-weight: 550;
   }
 
   .LastDiscussion-bottomRow {
@@ -249,6 +265,52 @@
       color: @categories-sub-color-muted;
       .LastDiscussion-usernameLink {
         color: @categories-sub-color-muted;
+      }
+    }
+  }
+}
+
+body.dark {
+  .TagCategory.SubCategory {
+    .TagCategory-content {
+      color: @categories-sub-dark-color-highlighted;
+      background-color: @categories-sub-dark-color-background;
+
+      .TagCategory-main .TagCategory-description {
+        color: @categories-sub-dark-color-muted;
+      }
+
+      .TagCategory-icon {
+        .CategoryIcon {
+          //TODO
+          color: @categories-color-highlighted;
+        }
+      }
+
+      &:hover {
+        background-color: @categories-sub-dark-color-background-hover;
+      }
+    }
+
+    .StatWidget {
+      border-right: 2px solid @categories-sub-dark-color-more-muted;
+    }
+    .StatWidget-label {
+      color: @categories-sub-dark-color-muted;
+    }
+
+    .TagCategory-lastDiscussion.empty {
+      .LastDiscussion {
+        color: @categories-sub-dark-color-highlighted;
+      }
+    }
+    .LastDiscussion-topRow {
+      color: @categories-sub-dark-color-highlighted;
+    }
+    .LastDiscussion-bottomRow {
+      color: @categories-sub-dark-color-muted;
+      .LastDiscussion-usernameLink {
+        color: @categories-sub-dark-color-muted;
       }
     }
   }

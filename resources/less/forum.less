@@ -10,7 +10,10 @@
 
 @categories-sub-color-highlighted: lighten(#000, 5%);
 @categories-sub-color-muted: lighten(@categories-sub-color-highlighted, 30%);
-@categories-sub-color-more-muted: lighten(@categories-sub-color-highlighted, 75%);
+@categories-sub-color-more-muted: lighten(
+  @categories-sub-color-highlighted,
+  75%
+);
 
 // Systems
 .TagCategory {
@@ -199,6 +202,10 @@
     display: flex;
   }
 
+  .LastDiscussion-topRow {
+    color: @categories-color-white;
+  }
+
   .LastDiscussion-bottomRow {
     color: @categories-color-white-muted;
 
@@ -216,9 +223,14 @@
 
 .TagCategory.SubCategory {
   .LastDiscussion {
-    color: @categories-sub-color-highlighted;
+    .LastDiscussion-topRow {
+      color: @categories-sub-color-highlighted;
+    }
     .LastDiscussion-bottomRow {
       color: @categories-sub-color-muted;
+      .LastDiscussion-usernameLink {
+        color: @categories-sub-color-muted;
+      }
     }
   }
 }

@@ -8,12 +8,24 @@
 @categories-color-highlighted: @categories-color-white;
 @categories-color-muted: @categories-color-white-muted;
 
-@categories-sub-color-highlighted: lighten(#000, 5%);
-@categories-sub-color-muted: lighten(@categories-sub-color-highlighted, 30%);
-@categories-sub-color-more-muted: lighten(
-  @categories-sub-color-highlighted,
-  75%
-);
+.define-colors(@config-dark-mode);
+.define-colors(false) {
+  @categories-sub-color-background: darken(#fff, 10%);
+  @categories-sub-color-background-hover: darken(#fff, 15%);
+  @categories-sub-color-highlighted: lighten(#000, 5%);
+  @categories-sub-color-muted: lighten(@categories-sub-color-highlighted, 30%);
+  @categories-sub-color-more-muted: lighten(
+    @categories-sub-color-highlighted,
+    75%
+  );
+}
+.define-colors(true) {
+  @categories-sub-color-background: lighten(#000, 20%);
+  @categories-sub-color-background-hover: lighten(#000, 30%);
+  @categories-sub-color-highlighted: darken(@categories-color-white, 5%);
+  @categories-sub-color-muted: darken(@categories-color-white, 11%);
+  @categories-sub-color-more-muted: darken(@categories-color-white, 25%);
+}
 
 // Systems
 .TagCategory {
@@ -54,6 +66,7 @@
       flex-direction: column;
       text-align: left;
       justify-content: center;
+      overflow: hidden;
 
       .TagCategory-name {
         display: block;
@@ -64,6 +77,7 @@
       .TagCategory-description {
         margin-top: 0.5em;
         color: @categories-color-muted;
+        overflow-wrap: break-word;
       }
     }
 
@@ -92,7 +106,7 @@
     color: @categories-sub-color-highlighted;
     padding: 10px 20px;
     margin: 5px 0;
-    background-color: @categories-color-white-slightly-muted;
+    background-color: @categories-sub-color-background;
     box-shadow: 0 2px 4px 0em rgba(0, 0, 0, 0.04),
       0 3px 10px 0 rgba(0, 0, 0, 0.07);
 
@@ -111,7 +125,7 @@
     }
 
     &:hover {
-      background-color: @categories-color-white-muted;
+      background-color: @categories-sub-color-background-hover;
     }
   }
 
@@ -222,6 +236,11 @@
 }
 
 .TagCategory.SubCategory {
+  .TagCategory-lastDiscussion.empty {
+    .LastDiscussion {
+      color: @categories-sub-color-highlighted;
+    }
+  }
   .LastDiscussion {
     .LastDiscussion-topRow {
       color: @categories-sub-color-highlighted;
@@ -292,6 +311,12 @@
   .TagCategory-alignStart {
     max-width: 50%;
     margin-bottom: 0;
+  }
+
+  .TagCategory.SubCategory {
+    .TagCategory-alignStart {
+      max-width: 40%;
+    }
   }
 
   .StatWidget {

@@ -335,15 +335,22 @@ var Category = /*#__PURE__*/function (_Component) {
     var items = new flarum_utils_ItemList__WEBPACK_IMPORTED_MODULE_3___default.a();
 
     if (this.tag.icon() && this.isChild) {
+      var style = {};
+
+      if (app.forum.attribute('categories.childBareIcon')) {
+        style.color = this.tag.color();
+      }
+
       items.add('icon', m("span", {
         "class": "fa-stack fa-2x"
-      }, m("i", {
+      }, app.forum.attribute('categories.childBareIcon') ? '' : m("i", {
         "class": "fa fa-circle fa-stack-2x icon-background",
         style: {
           color: this.tag.color()
         }
       }), flarum_helpers_icon__WEBPACK_IMPORTED_MODULE_2___default()(this.tag.icon(), {
-        className: 'fa-stack-1x CategoryIcon'
+        className: 'fa-stack-1x CategoryIcon',
+        style: style
       })), 10);
     } else if (this.tag.icon() && !app.forum.attribute('categories.parentRemoveIcon')) {
       items.add('icon', m("span", {

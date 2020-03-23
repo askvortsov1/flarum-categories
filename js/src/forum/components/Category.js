@@ -61,10 +61,15 @@ export default class Category extends Component {
         const items = new ItemList;
 
         if (this.tag.icon() && this.isChild) {
+            const style = {};
+            if (app.forum.attribute('categories.childBareIcon')) {
+                style.color = this.tag.color();
+            }
             items.add('icon',
                 <span class="fa-stack fa-2x">
-                    <i class="fa fa-circle fa-stack-2x icon-background" style={{ color: this.tag.color() }}></i>
-                    {icon(this.tag.icon(), { className: 'fa-stack-1x CategoryIcon' })}
+                    {app.forum.attribute('categories.childBareIcon') ?
+                        '' : <i class="fa fa-circle fa-stack-2x icon-background" style={{ color: this.tag.color() }}></i>}
+                    {icon(this.tag.icon(), { className: 'fa-stack-1x CategoryIcon', style: style })}
                 </span>, 10);
         } else if (this.tag.icon() && !app.forum.attribute('categories.parentRemoveIcon')) {
             items.add('icon',

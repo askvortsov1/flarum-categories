@@ -20,6 +20,9 @@ app.initializers.add('askvortsov/flarum-categories', () => {
                     <BooleanItem key="askvortsov-categories.full-page-desktop" required>
                         {app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop')}
                     </BooleanItem>,
+                    <BooleanItem key="askvortsov-categories.child-bare-icon" required>
+                        {app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')}
+                    </BooleanItem>,
                     <BooleanItem key="askvortsov-categories.parent-remove-icon" required>
                         {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')}
                     </BooleanItem>,

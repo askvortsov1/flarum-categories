@@ -1,6 +1,21 @@
+// Variables
+
+@categories-color-white: #fff;
+@categories-color-white-slightly-muted: darken(@categories-color-white, 5%);
+@categories-color-white-muted: darken(@categories-color-white, 11%);
+@categories-color-white-more-muted: darken(@categories-color-white, 25%);
+
+@categories-color-highlighted: @categories-color-white;
+@categories-color-muted: @categories-color-white-muted;
+
+@categories-sub-color-highlighted: lighten(#000, 5%);
+@categories-sub-color-muted: lighten(@categories-sub-color-highlighted, 30%);
+@categories-sub-color-more-muted: lighten(@categories-sub-color-highlighted, 75%);
+
+// Systems
 .TagCategory {
   list-style: none;
-  color: rgb(255, 255, 255);
+  color: @categories-color-white;
 
   .TagCategory-content {
     padding: 15px 20px;
@@ -9,7 +24,7 @@
     justify-content: space-between;
     background-color: @primary-color;
     text-decoration: none !important;
-    color: #fff;
+    color: @categories-color-highlighted;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18),
       0 3px 10px 0 rgba(0, 0, 0, 0.15);
 
@@ -45,7 +60,7 @@
 
       .TagCategory-description {
         margin-top: 0.5em;
-        color: rgba(255, 255, 255, 0.7);
+        color: @categories-color-muted;
       }
     }
 
@@ -71,15 +86,15 @@
 
 .TagCategory.SubCategory {
   .TagCategory-content {
-    color: #000;
+    color: @categories-sub-color-highlighted;
     padding: 10px 20px;
     margin: 5px 0;
-    background-color: rgb(250, 250, 250);
+    background-color: @categories-color-white-slightly-muted;
     box-shadow: 0 2px 4px 0em rgba(0, 0, 0, 0.04),
       0 3px 10px 0 rgba(0, 0, 0, 0.07);
 
     .TagCategory-main .TagCategory-description {
-      color: rgba(0, 0, 0, 0.7);
+      color: @categories-sub-color-muted;
     }
 
     .TagCategory-name {
@@ -88,12 +103,12 @@
 
     .TagCategory-icon {
       .CategoryIcon {
-        color: #fff;
+        color: @categories-color-highlighted;
       }
     }
 
     &:hover {
-      background: fade(#000, 5%) !important;
+      background-color: @categories-color-white-muted;
     }
   }
 
@@ -109,7 +124,7 @@
   display: flex;
 
   > .StatWidget {
-    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    border-right: 2px solid @categories-color-white-more-muted;
     display: flex;
     padding: 0 10px;
     align-items: center;
@@ -123,25 +138,25 @@
     }
 
     .StatWidget-label {
-      color: rgba(255, 255, 255, 0.7);
+      color: @categories-color-white-muted;
     }
   }
 }
 
 .TagCategory.SubCategory {
   .StatWidget {
-    border-right: 2px solid #e0e0e0;
+    border-right: 2px solid @categories-sub-color-more-muted;
     display: flex;
   }
   .StatWidget-label {
-    color: rgba(0, 0, 0, 0.7);
+    color: @categories-sub-color-muted;
   }
 }
 
 .LastDiscussion {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: @categories-color-highlighted;
 
   .LastDiscussion-userCardContainer {
     display: block;
@@ -185,7 +200,7 @@
   }
 
   .LastDiscussion-bottomRow {
-    color: rgba(255, 255, 255, 0.7);
+    color: @categories-color-white-muted;
 
     .LastDiscussion-usernameLink,
     .username,
@@ -194,16 +209,16 @@
     }
 
     .LastDiscussion-usernameLink {
-      color: rgba(255, 255, 255, 0.7);
+      color: @categories-color-white-muted;
     }
   }
 }
 
 .TagCategory.SubCategory {
   .LastDiscussion {
-    color: #000;
+    color: @categories-sub-color-highlighted;
     .LastDiscussion-bottomRow {
-      color: rgba(0, 0, 0, 0.7);
+      color: @categories-sub-color-muted;
     }
   }
 }
@@ -216,8 +231,6 @@
   .TagCategory-alignEnd {
     flex-direction: column;
     margin-top: 25px;
-  }
-  .TagCategory-alignStart {
   }
 
   .StatWidget {

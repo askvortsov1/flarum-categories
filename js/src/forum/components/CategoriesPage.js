@@ -21,7 +21,6 @@ export default class CategoriesPage extends TagsPage {
     extend(IndexPage.prototype, 'sidebarItems', function (items) {
       if (app.current instanceof CategoriesPage && app.forum.attribute('categories.fullPageDesktop')) {
         for (const item in items.items) {
-          console.log(item)
           if (item != 'newDiscussion' && item != 'nav') {
             items.remove(item);
           }

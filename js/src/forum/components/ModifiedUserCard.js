@@ -25,8 +25,6 @@ export default class ModifiedUserCard extends Component {
     view() {
         const user = this.props.user;
 
-        console.log(user.joinTime())
-        console.log(user)
         const controls = UserControls.controls(user, this).toArray();
         const color = user.color();
         const badges = user.badges().toArray();

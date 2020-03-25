@@ -176,8 +176,6 @@ var CategoriesPage = /*#__PURE__*/function (_TagsPage) {
     Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'sidebarItems', function (items) {
       if (app.current instanceof CategoriesPage && app.forum.attribute('categories.fullPageDesktop')) {
         for (var item in items.items) {
-          console.log(item);
-
           if (item != 'newDiscussion' && item != 'nav') {
             items.remove(item);
           }
@@ -626,8 +624,6 @@ var ModifiedUserCard = /*#__PURE__*/function (_Component) {
 
   _proto.view = function view() {
     var user = this.props.user;
-    console.log(user.joinTime());
-    console.log(user);
     var controls = flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_4___default.a.controls(user, this).toArray();
     var color = user.color();
     var badges = user.badges().toArray();

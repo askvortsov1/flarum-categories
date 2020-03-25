@@ -127,7 +127,11 @@
 
     .TagCategory-icon {
       .CategoryIcon {
-        color: @categories-color-highlighted;
+        color: @categories-sub-color-background;
+      }
+
+      .CategoryIcon.NoBackgroundCategoryIcon {
+        color: @categories-sub-color-highlighted;
       }
     }
 
@@ -282,7 +286,10 @@ body.dark {
 
       .TagCategory-icon {
         .CategoryIcon {
-          //TODO
+          color: @categories-sub-dark-color-background;
+        }
+
+        .CategoryIcon.NoBackgroundCategoryIcon {
           color: @categories-color-highlighted;
         }
       }

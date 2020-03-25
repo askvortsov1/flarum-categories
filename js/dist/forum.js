@@ -336,9 +336,11 @@ var Category = /*#__PURE__*/function (_Component) {
 
     if (this.tag.icon() && this.isChild) {
       var style = {};
+      var iconClasses = 'fa-stack-1x CategoryIcon';
 
       if (app.forum.attribute('categories.childBareIcon')) {
         style.color = this.tag.color();
+        iconClasses += ' NoBackgroundCategoryIcon';
       }
 
       items.add('icon', m("span", {
@@ -349,7 +351,7 @@ var Category = /*#__PURE__*/function (_Component) {
           color: this.tag.color()
         }
       }), flarum_helpers_icon__WEBPACK_IMPORTED_MODULE_2___default()(this.tag.icon(), {
-        className: 'fa-stack-1x CategoryIcon',
+        className: iconClasses,
         style: style
       })), 10);
     } else if (this.tag.icon() && !app.forum.attribute('categories.parentRemoveIcon')) {

@@ -26,11 +26,12 @@ class AddSettings
         if ($event->isSerializer(ForumSerializer::class)) {
             $event->attributes['categories.keepTagsNav'] = (bool) $this->settings->get('askvortsov-categories.keep-tags-nav');
             $event->attributes['categories.fullPageDesktop'] = (bool) $this->settings->get('askvortsov-categories.full-page-desktop');
-            $event->attributes['categories.childBareIcon'] = (bool) $this->settings->get('askvortsov-categories.child-bare-icon');
+            $event->attributes['categories.compactMobile'] = (bool) $this->settings->get('askvortsov-categories.compact-mobile');
             $event->attributes['categories.parentRemoveIcon'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-icon');
             $event->attributes['categories.parentRemoveDescription'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-description');
             $event->attributes['categories.parentRemoveStats'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-stats');
             $event->attributes['categories.parentRemoveLastDiscussion'] = (bool) $this->settings->get('askvortsov-categories.parent-remove-last-discussion');
+            $event->attributes['categories.childBareIcon'] = (bool) $this->settings->get('askvortsov-categories.child-bare-icon');
         }
     }
 }

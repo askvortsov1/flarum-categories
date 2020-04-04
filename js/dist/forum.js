@@ -342,7 +342,7 @@ var Category = /*#__PURE__*/function (_Component) {
       "class": "TagCategory-icon"
     }, this.iconItems().toArray()), m("div", {
       "class": "TagCategory-main"
-    }, this.mainItems().toArray())), m("p", {
+    }, this.mainItems().toArray())), children.length == 0 ? '' : m("p", {
       "class": "TagCategory-toggleArrow",
       onclick: function onclick(e) {
         _this.toggleArrow(e);

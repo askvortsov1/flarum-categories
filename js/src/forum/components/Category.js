@@ -65,7 +65,7 @@ export default class Category extends Component {
                                 {this.mainItems().toArray()}
                             </div>
                         </div>
-                        <p class="TagCategory-toggleArrow" onclick={(e) => { this.toggleArrow(e) }}>{icon(this.collapsed ? 'fas fa-caret-down' : 'fas fa-caret-up')}</p>
+                        {children.length == 0 ? '' : <p class="TagCategory-toggleArrow" onclick={(e) => { this.toggleArrow(e) }}>{icon(this.collapsed ? 'fas fa-caret-down' : 'fas fa-caret-up')}</p>}
                     </div>
                     <div class="TagCategory-alignEnd">
                         <div class="TagCategory-stats StatWidgetList">

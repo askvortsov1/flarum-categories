@@ -23,8 +23,13 @@ export default class Category extends Component {
     }
 
     view() {
-        this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
         const tag = this.tag;
+
+        if (!tag) {
+            return '';
+        }
+
+        this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
 
         const children = this.isChild ? [] : sortTags(app.store.all('tags').filter(child => child.parent() === tag));
 

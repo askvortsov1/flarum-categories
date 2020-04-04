@@ -297,8 +297,13 @@ var Category = /*#__PURE__*/function (_Component) {
   _proto.view = function view() {
     var _this = this;
 
-    this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
     var tag = this.tag;
+
+    if (!tag) {
+      return '';
+    }
+
+    this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
     var children = this.isChild ? [] : flarum_tags_utils_sortTags__WEBPACK_IMPORTED_MODULE_4___default()(app.store.all('tags').filter(function (child) {
       return child.parent() === tag;
     }));

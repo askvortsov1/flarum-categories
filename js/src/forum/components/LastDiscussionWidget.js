@@ -46,7 +46,7 @@ export default class LastDiscussionWidget extends Component {
                 </a>
                 <div class="LastDiscussion-content">
                     <div class="LastDiscussion-bottomRow">
-                        {humanTime(discussion.lastPostedAt())} |  <a className="LastDiscussion-usernameLink" href={user ? app.route.user(user) : '#'} config={this.stopProp}>{username(user)}</a>
+                        {humanTime(discussion.lastPostedAt())} <a className="LastDiscussion-usernameLink" href={user ? app.route.user(user) : '#'} config={this.stopProp}>  |  {username(user)}</a>
                     </div>
                     <div class="LastDiscussion-topRow">
                         {truncate(discussion.title(), 26)}

@@ -51,9 +51,14 @@
       0 3px 10px 0 rgba(0, 0, 0, 0.15);
 
     .TagCategory-alignStart,
+    .TagCategory-alignStart-main,
     .TagCategory-alignEnd {
       display: flex;
       align-items: center;
+    }
+
+    .TagCategory-toggleArrow {
+      display: none;
     }
 
     .TagCategory-icon,
@@ -88,7 +93,7 @@
       }
     }
 
-    &:hover {
+    &.hover:hover {
       opacity: 90%;
     }
   }
@@ -135,7 +140,7 @@
       }
     }
 
-    &:hover {
+    &.hover:hover {
       background-color: @categories-sub-color-background-hover;
     }
   }
@@ -294,7 +299,7 @@ body.dark {
         }
       }
 
-      &:hover {
+      &.hover:hover {
         background-color: @categories-sub-dark-color-background-hover;
       }
     }
@@ -426,5 +431,96 @@ body.dark {
 
   .TagCategory.SubCategory .TagCategory-lastDiscussion {
     width: 250px;
+  }
+}
+
+@media @phone {
+  .TagCategoryList > .TagCategory.compactMobile {
+    margin-bottom: 15px;
+  }
+
+  .compactMobile {
+    .TagCategory-description {
+      display: none;
+    }
+    &.hover:hover {
+      opacity: 90%;
+    }
+  }
+
+  .ParentCategory.compactMobile {
+    >.TagCategory-content {
+      padding: 10px 15px;
+
+      > :nth-child(1) {
+        order: 1;
+      }
+      > :nth-child(2) {
+        order: 3;
+      }
+      > :nth-child(3) {
+        order: 2;
+      }
+      
+      .TagCategory-alignStart {
+        justify-content: space-between;
+      }
+
+      .TagCategory-toggleArrow {
+        display: flex;
+        font-size: 30px;
+        margin-right: 20px;
+        &.hover:hover {
+          opacity: 50%;
+        }
+      }
+
+      >.TagCategory-alignEnd {
+        margin-top: 0;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        align-content: center;
+        padding-top: 5px;
+        border-top: 1px solid black;
+
+        .TagCategory-lastDiscussion {
+          margin-top: 0;
+          border-top: 0;
+
+          .LastDiscussion-usernameLink {
+            display: none;
+          }
+        }
+      }
+      .TagCategory-subTagList {
+        > :last-child {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .SubCategory.compactMobile {
+    .TagCategory-content {
+      flex-direction: row;
+      padding: 7px 15px;
+    }
+    .TagCategory-name {
+      font-size: 16px;
+    }
+
+    .TagCategory-toggleArrow {
+      display:none !important;
+    }
+
+    .TagCategory-alignEnd {
+      margin-top: 0;
+      justify-content: center;
+      border-top: 0;
+
+      .TagCategory-lastDiscussion {
+        display: none;
+      }
+    }
   }
 }

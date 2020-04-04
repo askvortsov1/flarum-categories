@@ -91,7 +91,7 @@ module.exports =
 /*!******************!*\
   !*** ./admin.js ***!
   \******************/
-/*! no exports provided */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -129,28 +129,55 @@ app.initializers.add('askvortsov/flarum-categories', function () {
     return app.modal.show(new SettingsModal({
       title: app.translator.trans('askvortsov-categories.admin.title'),
       type: 'small',
-      items: [m(BooleanItem, {
+      items: [m("legend", {
+        "class": "categories-legend"
+      }, app.translator.trans('askvortsov-categories.admin.headings.nav')), m(BooleanItem, {
         key: "askvortsov-categories.keep-tags-nav",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')), m(BooleanItem, {
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav'))), m("legend", {
+        "class": "categories-legend"
+      }, app.translator.trans('askvortsov-categories.admin.headings.layout')), m(BooleanItem, {
         key: "askvortsov-categories.full-page-desktop",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop')), m(BooleanItem, {
-        key: "askvortsov-categories.child-bare-icon",
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop'))), m(BooleanItem, {
+        key: "askvortsov-categories.compact-mobile",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')), m(BooleanItem, {
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.compact_mobile_mode'))), m("legend", {
+        "class": "categories-legend"
+      }, app.translator.trans('askvortsov-categories.admin.headings.parent_display')), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-icon",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')), m(BooleanItem, {
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon'))), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-description",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_description')), m(BooleanItem, {
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_description'))), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-stats",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_stats')), m(BooleanItem, {
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_stats'))), m(BooleanItem, {
         key: "askvortsov-categories.parent-remove-last-discussion",
         required: true
-      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion'))]
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion'))), m("legend", {
+        "class": "categories-legend"
+      }, app.translator.trans('askvortsov-categories.admin.headings.child_display')), m(BooleanItem, {
+        key: "askvortsov-categories.child-bare-icon",
+        required: true
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')))]
     }));
   };
 

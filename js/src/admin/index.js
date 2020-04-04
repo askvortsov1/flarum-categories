@@ -14,27 +14,45 @@ app.initializers.add('askvortsov/flarum-categories', () => {
                 title: app.translator.trans('askvortsov-categories.admin.title'),
                 type: 'small',
                 items: [
+                    <legend class="categories-legend">
+                        {app.translator.trans('askvortsov-categories.admin.headings.nav')}
+                    </legend>,
                     <BooleanItem key="askvortsov-categories.keep-tags-nav" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')}
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.keep_tags_nav')}</span>
                     </BooleanItem>,
+
+                    <legend class="categories-legend">
+                        {app.translator.trans('askvortsov-categories.admin.headings.layout')}
+                    </legend>,
                     <BooleanItem key="askvortsov-categories.full-page-desktop" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop')}
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop')}</span>
                     </BooleanItem>,
-                    <BooleanItem key="askvortsov-categories.child-bare-icon" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')}
+                    <BooleanItem key="askvortsov-categories.compact-mobile" required>
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.compact_mobile_mode')}</span>
                     </BooleanItem>,
+
+                    <legend class="categories-legend">
+                        {app.translator.trans('askvortsov-categories.admin.headings.parent_display')}
+                    </legend>,
                     <BooleanItem key="askvortsov-categories.parent-remove-icon" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')}
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.parent_remove_icon')}</span>
                     </BooleanItem>,
                     <BooleanItem key="askvortsov-categories.parent-remove-description" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_description')}
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.parent_remove_description')}</span>
                     </BooleanItem>,
                     <BooleanItem key="askvortsov-categories.parent-remove-stats" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_stats')}
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.parent_remove_stats')}</span>
                     </BooleanItem>,
                     <BooleanItem key="askvortsov-categories.parent-remove-last-discussion" required>
-                        {app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion')}
-                    </BooleanItem>
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.parent_remove_last_discussion')}</span>
+                    </BooleanItem>,
+
+                    <legend class="categories-legend">
+                        {app.translator.trans('askvortsov-categories.admin.headings.child_display')}
+                    </legend>,
+                    <BooleanItem key="askvortsov-categories.child-bare-icon" required>
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')}</span>
+                    </BooleanItem>,
                 ],
             })
         );

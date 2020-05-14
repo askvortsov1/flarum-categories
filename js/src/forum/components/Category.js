@@ -35,7 +35,7 @@ export default class Category extends Component {
 
         const cardStyle = this.isChild ? {} : { backgroundColor: tag.color() };
 
-        const classNames = ['TagCategory'];
+        const classNames = ['TagCategory', `TagCategory-${tag.slug()}`];
         if (this.isChild) {
             classNames.push('SubCategory');
         } else {
@@ -57,7 +57,7 @@ export default class Category extends Component {
 
         return (
             <li class={classNames.join(' ')}>
-                <a class="TagCategory-content"
+                <a class={`TagCategory-content TagCategory-content-${tag.slug()}`}
                     style={cardStyle}
                     href={app.route.tag(tag)}
                     config={this.stopProp}>

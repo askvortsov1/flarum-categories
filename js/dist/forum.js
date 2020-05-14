@@ -310,7 +310,7 @@ var Category = /*#__PURE__*/function (_Component) {
     var cardStyle = this.isChild ? {} : {
       backgroundColor: tag.color()
     };
-    var classNames = ['TagCategory'];
+    var classNames = ['TagCategory', "TagCategory-" + tag.slug()];
 
     if (this.isChild) {
       classNames.push('SubCategory');
@@ -335,7 +335,7 @@ var Category = /*#__PURE__*/function (_Component) {
     return m("li", {
       "class": classNames.join(' ')
     }, m("a", {
-      "class": "TagCategory-content",
+      "class": "TagCategory-content TagCategory-content-" + tag.slug(),
       style: cardStyle,
       href: app.route.tag(tag),
       config: this.stopProp

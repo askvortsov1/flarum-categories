@@ -11,9 +11,12 @@
 
 namespace Askvortsov\FlarumCategories;
 
+use Askvortsov\FlarumCategories\Console\RecalculateTagStats;
 use Flarum\Extend;
 use FoF\Components\Extend\AddFofComponents;
 use Illuminate\Contracts\Events\Dispatcher;
+
+
 
 return [
     new AddFofComponents(),
@@ -28,5 +31,7 @@ return [
         $events->subscribe(Listeners\AddTagAttributes::class);
         $events->subscribe(Listeners\AddSettings::class);
     },
-    new Extend\Locales(__DIR__ . '/resources/locale')
+    new Extend\Locales(__DIR__ . '/resources/locale'),
+
+    (new Extend\Console)->command(RecalculateTagStats::class),
 ];

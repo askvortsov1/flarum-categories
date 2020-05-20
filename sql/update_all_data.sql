@@ -5,8 +5,7 @@ UPDATE [PREFIX]tags tags,
       a.discussion_count as discussion_count,
       a.post_count as post_count,
       b.last_posted_discussion_id as last_posted_discussion_id,
-      b.last_posted_at as last_posted_at,
-      b.last_posted_user_id as last_posted_user_id
+      b.last_posted_at as last_posted_at
     FROM (
         SELECT
           t.id as tag_id,
@@ -26,7 +25,6 @@ UPDATE [PREFIX]tags tags,
         SELECT
           d.id as last_posted_discussion_id,
           d.last_posted_at as last_posted_at,
-          d.last_posted_user_id as last_posted_user_id,
           td.tag_id
         FROM [PREFIX]discussions d
         LEFT JOIN [PREFIX]discussion_tag td on d.id = td.discussion_id
@@ -40,7 +38,6 @@ SET
   tags.discussion_count = source.discussion_count,
   tags.post_count = source.post_count,
   tags.last_posted_at = source.last_posted_at,
-  tags.last_posted_discussion_id = source.last_posted_discussion_id,
-  tags.last_posted_user_id = source.last_posted_user_id
+  tags.last_posted_discussion_id = source.last_posted_discussion_id
 WHERE
   tags.id = source.tag_id;

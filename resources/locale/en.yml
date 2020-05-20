@@ -11,11 +11,13 @@ askvortsov-categories:
       parent_remove_description: Hide descriptions for top-level tags?
       parent_remove_stats: Hide stats for top-level tags?
       parent_remove_last_discussion: Hide most recent discussions for top-level tags?
+      small_forum_optimized: Optimize for small forums? This will give more accurate discussion/post counts, but will slow medium and large forums dramatically.
     headings:
       nav: Navigation
       layout: Layout
       parent_display: Parent Category Display
       child_display: Child Category Display
+      performance: Performance
     title: Categories Settings
   forum:
     categories:

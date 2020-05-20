@@ -177,7 +177,14 @@ app.initializers.add('askvortsov/flarum-categories', function () {
         required: true
       }, m("span", {
         "class": "categories-label"
-      }, app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')))]
+      }, app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon'))), m("legend", {
+        "class": "categories-legend"
+      }, app.translator.trans('askvortsov-categories.admin.headings.performance')), m(BooleanItem, {
+        key: "askvortsov-categories.small-forum-optimized",
+        required: true
+      }, m("span", {
+        "class": "categories-label"
+      }, app.translator.trans('askvortsov-categories.admin.labels.small_forum_optimized')))]
     }));
   };
 

@@ -53,6 +53,13 @@ app.initializers.add('askvortsov/flarum-categories', () => {
                     <BooleanItem key="askvortsov-categories.child-bare-icon" required>
                         <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon')}</span>
                     </BooleanItem>,
+
+                    <legend class="categories-legend">
+                        {app.translator.trans('askvortsov-categories.admin.headings.performance')}
+                    </legend>,
+                    <BooleanItem key="askvortsov-categories.small-forum-optimized" required>
+                        <span class="categories-label">{app.translator.trans('askvortsov-categories.admin.labels.small_forum_optimized')}</span>
+                    </BooleanItem>,
                 ],
             })
         );

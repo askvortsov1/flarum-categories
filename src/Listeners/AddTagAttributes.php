@@ -24,8 +24,8 @@ class AddTagAttributes
     public function addpostCount(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
-            $event->attributes['discussionCount'] = $event->model->discussions()->whereVisibleTo($event->actor)->count();
-            $event->attributes['postCount'] = $event->model->discussions()->whereVisibleTo($event->actor)->sum('comment_count');
+            $event->attributes['discussionCount'] = $event->model->discussion_count;
+            $event->attributes['postCount'] = $event->model->post_count;
         }
         if ($event->isSerializer(BasicUserSerializer::class) && $event->actor->can('viewUserList')) {
             $event->attributes['joinTime'] = $event->formatDate($event->model->joined_at);

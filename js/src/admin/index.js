@@ -4,7 +4,7 @@ import BasicsPage from 'flarum/components/BasicsPage';
 
 const {
     SettingsModal,
-    items: { BooleanItem, SelectItem, StringItem },
+    items: { BooleanItem },
 } = settings;
 
 app.initializers.add('askvortsov/flarum-categories', () => {

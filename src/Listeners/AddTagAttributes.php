@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-categories
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumCategories\Listeners;
 
 use Flarum\Api\Controller\ShowForumController;
@@ -58,7 +67,7 @@ class AddTagAttributes
     {
         if ($event->isController(ShowForumController::class)) {
             $event->addInclude([
-                'tags.lastPostedDiscussion.lastPostedUser'
+                'tags.lastPostedDiscussion.lastPostedUser',
             ]);
         }
     }

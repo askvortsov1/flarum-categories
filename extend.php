@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of askvortsov/flarum-categories.
+ * This file is part of askvortsov/flarum-categories
  *
- * Copyright (c) 2020 Alexander Skvortsov.
+ *  Copyright (c) 2020 Alexander Skvortsov.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
  */
 
 namespace Askvortsov\FlarumCategories;
@@ -21,7 +21,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 /**
  * @param \Flarum\Post\Post $post
- * @param int $delta
+ * @param int               $delta
  */
 function updateTagsPostCount($post, $delta)
 {
@@ -52,11 +52,11 @@ return [
         $events->subscribe(Listeners\AddTagAttributes::class);
         $events->subscribe(Listeners\AddSettings::class);
     },
-    new Extend\Locales(__DIR__ . '/resources/locale'),
+    new Extend\Locales(__DIR__.'/resources/locale'),
 
-    (new Extend\Console)->command(RecalculateTagStats::class),
+    (new Extend\Console())->command(RecalculateTagStats::class),
 
-    (new Extend\Event)
+    (new Extend\Event())
         ->listen(Hidden::class, function (Hidden $event) {
             updateTagsPostCount($event->post, -1);
         })

@@ -1,10 +1,12 @@
 <?php
 
 /*
- * This file is part of Flarum.
+ * This file is part of askvortsov/flarum-categories
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
  */
 
 namespace Askvortsov\FlarumCategories\Console;
@@ -24,6 +26,7 @@ class RecalculateTagStats extends AbstractCommand
         $this->container = $container;
         $this->database = $database;
     }
+
     /**
      * {@inheritdoc}
      */

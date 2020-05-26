@@ -1,11 +1,11 @@
-import Component from "flarum/Component";
+import Component from 'flarum/Component';
 
-import icon from "flarum/helpers/icon";
-import ItemList from "flarum/utils/ItemList";
-import sortTags from "flarum/tags/utils/sortTags";
+import icon from 'flarum/helpers/icon';
+import ItemList from 'flarum/utils/ItemList';
+import sortTags from 'flarum/tags/utils/sortTags';
 
-import StatWidget from "./StatWidget";
-import LastDiscussionWidget from "./LastDiscussionWidget";
+import StatWidget from './StatWidget';
+import LastDiscussionWidget from './LastDiscussionWidget';
 
 export default class Category extends Component {
   init() {
@@ -17,7 +17,7 @@ export default class Category extends Component {
 
     this.collapsed = false;
 
-    window.addEventListener("resize", function () {
+    window.addEventListener('resize', function () {
       m.redraw();
     });
   }
@@ -26,61 +26,43 @@ export default class Category extends Component {
     const tag = this.tag;
 
     if (!tag) {
-      return "";
+      return '';
     }
 
-    this.compactMobileMode =
-      window.innerWidth <= 767 &&
-      app.forum.attribute("categories.compactMobile");
+    this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
 
-    const children = this.isChild
-      ? []
-      : sortTags(
-          app.store.all("tags").filter((child) => child.parent() === tag)
-        );
+    const children = this.isChild ? [] : sortTags(app.store.all('tags').filter((child) => child.parent() === tag));
 
     const cardStyle = this.isChild ? {} : { backgroundColor: tag.color() };
 
-    const classNames = ["TagCategory", `TagCategory-${tag.slug()}`];
+    const classNames = ['TagCategory', `TagCategory-${tag.slug()}`];
     if (this.isChild) {
-      classNames.push("SubCategory");
+      classNames.push('SubCategory');
     } else {
-      classNames.push("ParentCategory");
+      classNames.push('ParentCategory');
     }
     if (this.compactMobileMode) {
-      classNames.push("compactMobile");
+      classNames.push('compactMobile');
     }
 
-    const lastDiscussionClassNames = (tag.lastPostedDiscussion()
-      ? ["TagCategory-lastDiscussion"]
-      : ["TagCategory-lastDiscussion empty"]
-    ).join(" ");
+    const lastDiscussionClassNames = (tag.lastPostedDiscussion() ? ['TagCategory-lastDiscussion'] : ['TagCategory-lastDiscussion empty']).join(' ');
 
     const childrenInContent = !this.isChild && this.compactMobileMode;
 
     const renderedChildren = (
-      <ol className="TagCategory-subTagList">
-        {children.map((child) => [
-          Category.component({ tag: child, parent: this }),
-        ])}
-      </ol>
+      <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ tag: child, parent: this })])}</ol>
     );
 
     return (
-      <li class={classNames.join(" ")}>
-        <a
-          class={`TagCategory-content TagCategory-content-${tag.slug()}`}
-          style={cardStyle}
-          href={app.route.tag(tag)}
-          config={this.stopProp}
-        >
+      <li class={classNames.join(' ')}>
+        <a class={`TagCategory-content TagCategory-content-${tag.slug()}`} style={cardStyle} href={app.route.tag(tag)} config={this.stopProp}>
           <div class="TagCategory-alignStart">
             <div class="TagCategory-alignStart-main">
               <span class="TagCategory-icon">{this.iconItems().toArray()}</span>
               <div class="TagCategory-main">{this.mainItems().toArray()}</div>
             </div>
             {children.length == 0 ? (
-              ""
+              ''
             ) : (
               <p
                 class="TagCategory-toggleArrow"
@@ -88,21 +70,17 @@ export default class Category extends Component {
                   this.toggleArrow(e);
                 }}
               >
-                {icon(this.collapsed ? "fas fa-caret-down" : "fas fa-caret-up")}
+                {icon(this.collapsed ? 'fas fa-caret-down' : 'fas fa-caret-up')}
               </p>
             )}
           </div>
           <div class="TagCategory-alignEnd">
-            <div class="TagCategory-stats StatWidgetList">
-              {this.statItems().toArray()}
-            </div>
-            <div class={lastDiscussionClassNames}>
-              {this.lastDiscussionItems().toArray()}
-            </div>
+            <div class="TagCategory-stats StatWidgetList">{this.statItems().toArray()}</div>
+            <div class={lastDiscussionClassNames}>{this.lastDiscussionItems().toArray()}</div>
           </div>
-          {childrenInContent && !this.collapsed ? renderedChildren : ""}
+          {childrenInContent && !this.collapsed ? renderedChildren : ''}
         </a>
-        {!childrenInContent && !this.isChild ? renderedChildren : ""}
+        {!childrenInContent && !this.isChild ? renderedChildren : ''}
       </li>
     );
   }
@@ -112,43 +90,27 @@ export default class Category extends Component {
 
     if (this.tag.icon() && this.isChild) {
       const style = {};
-      let iconClasses = "fa-stack-1x CategoryIcon";
-      if (app.forum.attribute("categories.childBareIcon")) {
+      let iconClasses = 'fa-stack-1x CategoryIcon';
+      if (app.forum.attribute('categories.childBareIcon')) {
         style.color = this.tag.color();
-        iconClasses += " NoBackgroundCategoryIcon";
+        iconClasses += ' NoBackgroundCategoryIcon';
       }
-      const classes = this.compactMobileMode
-        ? "fa-stack fa-1x"
-        : "fa-stack fa-2x";
+      const classes = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';
       items.add(
-        "icon",
+        'icon',
         <span class={classes}>
-          {app.forum.attribute("categories.childBareIcon") ? (
-            ""
+          {app.forum.attribute('categories.childBareIcon') ? (
+            ''
           ) : (
-            <i
-              class="fa fa-circle fa-stack-2x icon-background"
-              style={{ color: this.tag.color() }}
-            ></i>
+            <i class="fa fa-circle fa-stack-2x icon-background" style={{ color: this.tag.color() }}></i>
           )}
           {icon(this.tag.icon(), { className: iconClasses, style: style })}
         </span>,
         10
       );
-    } else if (
-      this.tag.icon() &&
-      !app.forum.attribute("categories.parentRemoveIcon")
-    ) {
-      const classes = this.compactMobileMode
-        ? "fa-stack fa-2x"
-        : "fa-stack fa-3x";
-      items.add(
-        "icon",
-        <span class={classes}>
-          {icon(this.tag.icon(), { className: "fa-stack-1x CategoryIcon" })}
-        </span>,
-        10
-      );
+    } else if (this.tag.icon() && !app.forum.attribute('categories.parentRemoveIcon')) {
+      const classes = this.compactMobileMode ? 'fa-stack fa-2x' : 'fa-stack fa-3x';
+      items.add('icon', <span class={classes}>{icon(this.tag.icon(), { className: 'fa-stack-1x CategoryIcon' })}</span>, 10);
     }
 
     return items;
@@ -157,18 +119,10 @@ export default class Category extends Component {
   mainItems() {
     const items = new ItemList();
 
-    items.add("name", <h4 class="TagCategory-name">{this.tag.name()}</h4>, 15);
+    items.add('name', <h4 class="TagCategory-name">{this.tag.name()}</h4>, 15);
 
-    if (
-      this.tag.description() &&
-      (this.isChild ||
-        !app.forum.attribute("categories.parentRemoveDescription"))
-    ) {
-      items.add(
-        "description",
-        <div class="TagCategory-description">{this.tag.description()}</div>,
-        10
-      );
+    if (this.tag.description() && (this.isChild || !app.forum.attribute('categories.parentRemoveDescription'))) {
+      items.add('description', <div class="TagCategory-description">{this.tag.description()}</div>, 10);
     }
 
     return items;
@@ -177,27 +131,23 @@ export default class Category extends Component {
   statItems() {
     const items = new ItemList();
 
-    if (this.isChild || !app.forum.attribute("categories.parentRemoveStats")) {
+    if (this.isChild || !app.forum.attribute('categories.parentRemoveStats')) {
       items.add(
-        "discussionCount",
+        'discussionCount',
         StatWidget.component({
           count: this.tag.discussionCount(),
-          label: app.translator.trans(
-            "askvortsov-categories.forum.stat-widgets.discussion_label"
-          ),
-          icon: "fas fa-file-alt",
+          label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label'),
+          icon: 'fas fa-file-alt',
         }),
         15
       );
 
       items.add(
-        "postCount",
+        'postCount',
         StatWidget.component({
           count: this.tag.postCount(),
-          label: app.translator.trans(
-            "askvortsov-categories.forum.stat-widgets.post_label"
-          ),
-          icon: "fas fa-comment",
+          label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label'),
+          icon: 'fas fa-comment',
         }),
         10
       );
@@ -209,12 +159,9 @@ export default class Category extends Component {
   lastDiscussionItems() {
     const items = new ItemList();
 
-    if (
-      this.isChild ||
-      !app.forum.attribute("categories.parentRemoveLastDiscussion")
-    ) {
+    if (this.isChild || !app.forum.attribute('categories.parentRemoveLastDiscussion')) {
       items.add(
-        "lastDiscussion",
+        'lastDiscussion',
         LastDiscussionWidget.component({
           discussion: this.tag.lastPostedDiscussion(),
         }),
@@ -228,37 +175,19 @@ export default class Category extends Component {
   config(isInitialized) {
     if (isInitialized) return;
 
-    this.$(".TagCategory-content,.TagCategory-toggleArrow").bind(
-      "mouseenter",
-      function (e) {
-        $(this).addClass("hover");
-        if (
-          $(this).parent().hasClass("SubCategory") ||
-          $(this).hasClass("TagCategory-toggleArrow")
-        ) {
-          $(this)
-            .closest(".ParentCategory")
-            .children(".TagCategory-content")
-            .removeClass("hover");
-        }
+    this.$('.TagCategory-content,.TagCategory-toggleArrow').bind('mouseenter', function (e) {
+      $(this).addClass('hover');
+      if ($(this).parent().hasClass('SubCategory') || $(this).hasClass('TagCategory-toggleArrow')) {
+        $(this).closest('.ParentCategory').children('.TagCategory-content').removeClass('hover');
       }
-    );
+    });
 
-    this.$(".TagCategory-content,.TagCategory-toggleArrow").bind(
-      "mouseleave",
-      function (e) {
-        $(this).removeClass("hover");
-        if (
-          $(this).parent().hasClass("SubCategory") ||
-          $(this).hasClass("TagCategory-toggleArrow")
-        ) {
-          $(this)
-            .closest(".ParentCategory")
-            .children(".TagCategory-content")
-            .addClass("hover");
-        }
+    this.$('.TagCategory-content,.TagCategory-toggleArrow').bind('mouseleave', function (e) {
+      $(this).removeClass('hover');
+      if ($(this).parent().hasClass('SubCategory') || $(this).hasClass('TagCategory-toggleArrow')) {
+        $(this).closest('.ParentCategory').children('.TagCategory-content').addClass('hover');
       }
-    );
+    });
   }
 
   toggleArrow(e) {
@@ -270,7 +199,7 @@ export default class Category extends Component {
 
   stopProp(element, isInitialized) {
     if (isInitialized) return;
-    $(element).on("click", (e) => e.stopPropagation());
+    $(element).on('click', (e) => e.stopPropagation());
     m.route.apply(this, arguments);
   }
 }

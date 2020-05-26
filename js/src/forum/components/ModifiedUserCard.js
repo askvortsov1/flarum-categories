@@ -1,13 +1,13 @@
-import Component from "flarum/Component";
-import humanTime from "flarum/utils/humanTime";
-import ItemList from "flarum/utils/ItemList";
-import UserControls from "flarum/utils/UserControls";
-import avatar from "flarum/helpers/avatar";
-import username from "flarum/helpers/username";
-import icon from "flarum/helpers/icon";
-import Dropdown from "flarum/components/Dropdown";
-import AvatarEditor from "flarum/components/AvatarEditor";
-import listItems from "flarum/helpers/listItems";
+import Component from 'flarum/Component';
+import humanTime from 'flarum/utils/humanTime';
+import ItemList from 'flarum/utils/ItemList';
+import UserControls from 'flarum/utils/UserControls';
+import avatar from 'flarum/helpers/avatar';
+import username from 'flarum/helpers/username';
+import icon from 'flarum/helpers/icon';
+import Dropdown from 'flarum/components/Dropdown';
+import AvatarEditor from 'flarum/components/AvatarEditor';
+import listItems from 'flarum/helpers/listItems';
 
 /**
  * The `UserCard` component displays a user's profile card. This is used both on
@@ -30,24 +30,19 @@ export default class ModifiedUserCard extends Component {
     const badges = user.badges().toArray();
 
     return (
-      <div
-        className={"UserCard " + (this.props.className || "")}
-        style={color ? { backgroundColor: color } : ""}
-      >
+      <div className={'UserCard ' + (this.props.className || '')} style={color ? { backgroundColor: color } : ''}>
         <div className="darkenBackground">
           <div className="container">
             {controls.length
               ? Dropdown.component({
                   children: controls,
-                  className: "UserCard-controls App-primaryControl",
-                  menuClassName: "Dropdown-menu--right",
+                  className: 'UserCard-controls App-primaryControl',
+                  menuClassName: 'Dropdown-menu--right',
                   buttonClassName: this.props.controlsButtonClassName,
-                  label: app.translator.trans(
-                    "core.forum.user_controls.button"
-                  ),
-                  icon: "fas fa-ellipsis-v",
+                  label: app.translator.trans('core.forum.user_controls.button'),
+                  icon: 'fas fa-ellipsis-v',
                 })
-              : ""}
+              : ''}
 
             <div className="UserCard-profile">
               <h2 className="UserCard-identity">
@@ -55,7 +50,7 @@ export default class ModifiedUserCard extends Component {
                   [
                     AvatarEditor.component({
                       user,
-                      className: "UserCard-avatar",
+                      className: 'UserCard-avatar',
                     }),
                     username(user),
                   ]
@@ -67,15 +62,9 @@ export default class ModifiedUserCard extends Component {
                 )}
               </h2>
 
-              {badges.length ? (
-                <ul className="UserCard-badges badges">{listItems(badges)}</ul>
-              ) : (
-                ""
-              )}
+              {badges.length ? <ul className="UserCard-badges badges">{listItems(badges)}</ul> : ''}
 
-              <ul className="UserCard-info">
-                {listItems(this.infoItems().toArray())}
-              </ul>
+              <ul className="UserCard-info">{listItems(this.infoItems().toArray())}</ul>
             </div>
           </div>
         </div>
@@ -97,23 +86,19 @@ export default class ModifiedUserCard extends Component {
       const online = user.isOnline();
 
       items.add(
-        "lastSeen",
-        <span className={"UserCard-lastSeen" + (online ? " online" : "")}>
+        'lastSeen',
+        <span className={'UserCard-lastSeen' + (online ? ' online' : '')}>
           {online
-            ? [
-                icon("fas fa-circle"),
-                " ",
-                app.translator.trans("core.forum.user.online_text"),
-              ]
-            : [icon("far fa-clock"), " ", humanTime(lastSeenAt)]}
+            ? [icon('fas fa-circle'), ' ', app.translator.trans('core.forum.user.online_text')]
+            : [icon('far fa-clock'), ' ', humanTime(lastSeenAt)]}
         </span>
       );
     }
 
     if (user.joinTime()) {
       items.add(
-        "joined",
-        app.translator.trans("core.forum.user.joined_date_text", {
+        'joined',
+        app.translator.trans('core.forum.user.joined_date_text', {
           ago: humanTime(user.joinTime()),
         })
       );
@@ -124,7 +109,7 @@ export default class ModifiedUserCard extends Component {
 
   stopProp(element, isInitialized) {
     if (isInitialized) return;
-    $(element).on("click", (e) => e.stopPropagation());
+    $(element).on('click', (e) => e.stopPropagation());
     m.route.apply(this, arguments);
   }
 }

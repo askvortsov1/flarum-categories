@@ -1,0 +1,34 @@
+askvortsov-categories:
+  admin:
+    basics:
+      categories_label: Kategorien
+    labels:
+      keep_tags_nav: Den Link zur Kategorieübersicht in der Navigationsleiste beibehalten?
+      child_bare_icon: Sollten Symbole in untergeordneten Kategorien ohne kreisförmigen Hintergrund angezeigt werden?
+      compact_mobile_mode: Kompakter mobiler Modus
+      full_page_desktop: Sollte das Navigationsmenü auf eine Zeile reduziert werden (wie auf der Seite mit den herkömmlichen Tags)? Dadurch werden auch Widgets (z. B. Statistiken des Friends of Flarum-Forums) in der Navigationsleiste der Kategorieseite ausgeblendet.
+      parent_remove_icon: Symbole für Kategorien der obersten Ebene ausblenden?
+      parent_remove_description: Beschreibungen für Kategorien der obersten Ebene ausblenden?
+      parent_remove_stats: Statistiken für Kategorien der obersten Ebene ausblenden?
+      parent_remove_last_discussion: Letzte Diskussionen für Hauptkategorien ausblenden?
+      small_forum_optimized: Für kleine Foren optimieren? Dies gibt genauere Diskussions- / Beitragszählungen, verlangsamt jedoch mittlere und große Foren dramatisch.
+    headings:
+      nav: Navigation
+      layout: Layout
+      parent_display: Darstellung der Hauptkategorien
+      child_display: Darstellung der Unterkategorien
+      performance: Performance
+    title: Kategorie-Einstellungen
+  forum:
+    categories:
+    header:
+      back_to_categories_tooltip: Zurück zu den Kategorien
+    index:
+      categories_link: Kategorien
+    meta:
+      categories_title: Kategorien
+    stat-widgets:
+      discussion_label: Unterhaltungen
+      post_label: Beiträge
+    last_discussion_widget:
+      no_discussions: Keine Unterhaltung (Noch!)

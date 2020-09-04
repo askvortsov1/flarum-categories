@@ -3,10 +3,12 @@ import avatar from 'flarum/helpers/avatar';
 import username from 'flarum/helpers/username';
 import humanTime from 'flarum/helpers/humanTime';
 import { truncate } from 'flarum/utils/string';
-import ModifiedUserCard from './ModifiedUserCard';
+import UserCard from 'flarum/components/UserCard';
 
 export default class LastDiscussionWidget extends Component {
-  init() {
+  oninit(vnode) {
+    super.oninit(vnode);
+
     /**
      * Whether or not the user hover card is visible.
      *
@@ -16,7 +18,7 @@ export default class LastDiscussionWidget extends Component {
   }
 
   view() {
-    const discussion = this.props.discussion;
+    const discussion = this.attrs.discussion;
 
     if (!discussion) {
       return <div class="LastDiscussion">{app.translator.trans('askvortsov-categories.forum.last_discussion_widget.no_discussions')}</div>;
@@ -27,7 +29,7 @@ export default class LastDiscussionWidget extends Component {
     let card = '';
 
     if (user && this.cardVisible) {
-      card = ModifiedUserCard.component({
+      card = UserCard.component({
         user,
         className: 'UserCard--popover',
         controlsButtonClassName: 'Button Button--icon Button--flat',
@@ -35,14 +37,14 @@ export default class LastDiscussionWidget extends Component {
     }
 
     return (
-      <a class="LastDiscussion" href={app.route.discussion(discussion)} config={this.stopProp}>
-        <a className="LastDiscussion-avatar" href={user ? app.route.user(user) : '#'} config={this.stopProp}>
+      <a class="LastDiscussion" route={app.route.discussion(discussion)}>
+        <a className="LastDiscussion-avatar" route={user ? app.route.user(user) : '#'}>
           {avatar(user)}
         </a>
         <div class="LastDiscussion-content">
           <div class="LastDiscussion-bottomRow">
             {humanTime(discussion.lastPostedAt())}{' '}
-            <a className="LastDiscussion-usernameLink" href={user ? app.route.user(user) : '#'} config={this.stopProp}>
+            <a className="LastDiscussion-usernameLink" route={user ? app.route.user(user) : '#'}>
               {' '}
               | {username(user)}
             </a>
@@ -54,14 +56,8 @@ export default class LastDiscussionWidget extends Component {
     );
   }
 
-  stopProp(element, isInitialized) {
-    if (isInitialized) return;
-    $(element).on('click', (e) => e.stopPropagation());
-    m.route.apply(this, arguments);
-  }
-
-  config(isInitialized) {
-    if (isInitialized) return;
+  oncreate(vnode) {
+    super.oncreate(vnode);
 
     let timeout;
 

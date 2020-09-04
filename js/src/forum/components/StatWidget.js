@@ -6,8 +6,8 @@ export default class StatWidget extends Component {
     const compactMobile = app.forum.attribute('categories.compactMobile') && window.innerWidth < 767;
     return (
       <div class="StatWidget">
-        <div class="StatWidget-count">{this.props.count}</div>
-        <div class="StatWidget-label">{compactMobile ? icon(this.props.icon) : this.props.label}</div>
+        <div class="StatWidget-count">{this.attrs.count}</div>
+        <div class="StatWidget-label">{compactMobile ? icon(this.attrs.icon) : this.attrs.label}</div>
       </div>
     );
   }

@@ -1,8 +1,8 @@
 import { extend } from 'flarum/extend';
 import Page from 'flarum/components/Page';
+import AffixedSidebar from 'flarum/components/AffixedSidebar';
 import IndexPage from 'flarum/components/IndexPage';
 import listItems from 'flarum/helpers/listItems';
-import humanTime from 'flarum/helpers/humanTime';
 
 import sortTags from 'flarum/tags/utils/sortTags';
 import tagLabel from 'flarum/tags/helpers/tagLabel';
@@ -11,8 +11,8 @@ import TagsPage from 'flarum/tags/components/TagsPage';
 import Category from './Category';
 
 export default class CategoriesPage extends TagsPage {
-  init() {
-    Page.prototype.init.call(this);
+  oninit(vnode) {
+    Page.prototype.oninit.call(this, vnode);
 
     this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.parent()));
 
@@ -41,14 +41,16 @@ export default class CategoriesPage extends TagsPage {
         {IndexPage.prototype.hero()}
         <div className="container">
           <div className={app.forum.attribute('categories.fullPageDesktop') ? '' : 'sideNavContainer'}>
-            <nav className="CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav" config={IndexPage.prototype.affixSidebar}>
-              <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
-            </nav>
+            <AffixedSidebar>
+              <nav className="CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav">
+                <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
+              </nav>
+            </AffixedSidebar>
 
             <div className="CategoriesPage-content sideNavOffset">
               <ol className="TagCategoryList">
                 {pinned.map((tag) => {
-                  return Category.component({ tag });
+                  return Category.component({ model: tag });
                 })}
               </ol>
 
@@ -60,14 +62,9 @@ export default class CategoriesPage extends TagsPage {
     );
   }
 
-  config(...args) {
-    super.config(...args);
+  oncreate(vnode) {
+    super.oncreate(vnode);
 
-    if (m.route() != '/') {
-      app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
-    } else {
-      app.setTitle('');
-    }
-    app.setTitleCount(0);
+    app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
   }
 }

@@ -279,55 +279,6 @@
   }
 }
 
-body.dark {
-  .TagCategory.SubCategory {
-    .TagCategory-content {
-      color: @categories-sub-dark-color-highlighted;
-      background-color: @categories-sub-dark-color-background;
-
-      .TagCategory-main .TagCategory-description {
-        color: @categories-sub-dark-color-muted;
-      }
-
-      .TagCategory-icon {
-        .CategoryIcon {
-          color: @categories-sub-dark-color-background;
-        }
-
-        .CategoryIcon.NoBackgroundCategoryIcon {
-          color: @categories-color-highlighted;
-        }
-      }
-
-      &.hover:hover {
-        background-color: @categories-sub-dark-color-background-hover;
-      }
-    }
-
-    .StatWidget {
-      border-right: 2px solid @categories-sub-dark-color-more-muted;
-    }
-    .StatWidget-label {
-      color: @categories-sub-dark-color-muted;
-    }
-
-    .TagCategory-lastDiscussion.empty {
-      .LastDiscussion {
-        color: @categories-sub-dark-color-highlighted;
-      }
-    }
-    .LastDiscussion-topRow {
-      color: @categories-sub-dark-color-highlighted;
-    }
-    .LastDiscussion-bottomRow {
-      color: @categories-sub-dark-color-muted;
-      .LastDiscussion-usernameLink {
-        color: @categories-sub-dark-color-muted;
-      }
-    }
-  }
-}
-
 @media @phone {
   .TagCategory-content {
     flex-direction: column;
@@ -528,13 +479,6 @@ body.dark {
 
       > .StatWidget {
         border-right: 2px solid @categories-color-white-more-muted;
-      }
-    }
-  }
-  body.dark {
-    .SubCategory.compactMobile {
-      .TagCategory-content {
-        background-color: fade(@categories-sub-dark-color-background, 65%);
       }
     }
   }

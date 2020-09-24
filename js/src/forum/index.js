@@ -8,7 +8,7 @@ import CategoriesPage from './components/CategoriesPage';
 app.initializers.add('askvortsov/flarum-categories', () => {
   app.routes.categories = {
     path: '/categories',
-    component: CategoriesPage.component(),
+    component: CategoriesPage,
   };
 
   Tag.prototype.postCount = Model.attribute('postCount');
@@ -19,22 +19,14 @@ app.initializers.add('askvortsov/flarum-categories', () => {
     }
     items.add(
       'categories',
-      LinkButton.component({
-        icon: 'fas fa-th-list',
-        children: app.translator.trans('askvortsov-categories.forum.index.categories_link'),
-        href: app.route('categories'),
-      }),
+      <LinkButton icon="fas fa-th-list" href={app.route('categories')}>
+        {app.translator.trans('askvortsov-categories.forum.index.categories_link')}
+      </LinkButton>,
       -9.5
     );
 
     if (items.has('moreTags')) {
-      items.replace(
-        'moreTags',
-        LinkButton.component({
-          children: app.translator.trans('flarum-tags.forum.index.more_link'),
-          href: app.route('categories'),
-        })
-      );
+      items.replace('moreTags', <LinkButton href={app.route('categories')}>{app.translator.trans('flarum-tags.forum.index.more_link')}</LinkButton>);
     }
 
     return items;

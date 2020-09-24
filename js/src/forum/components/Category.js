@@ -8,12 +8,12 @@ import StatWidget from './StatWidget';
 import LastDiscussionWidget from './LastDiscussionWidget';
 
 export default class Category extends Component {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
 
-    this.tag = this.props.tag;
+    this.tag = this.attrs.model;
 
-    this.isChild = this.props.parent != null && this.props.parent != undefined;
+    this.isChild = this.attrs.parent != null && this.attrs.parent != undefined;
 
     this.collapsed = false;
 
@@ -50,12 +50,12 @@ export default class Category extends Component {
     const childrenInContent = !this.isChild && this.compactMobileMode;
 
     const renderedChildren = (
-      <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ tag: child, parent: this })])}</ol>
+      <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ model: child, parent: this })])}</ol>
     );
 
     return (
       <li class={classNames.join(' ')}>
-        <a class={`TagCategory-content TagCategory-content-${tag.slug()}`} style={cardStyle} href={app.route.tag(tag)} config={this.stopProp}>
+        <a class={`TagCategory-content TagCategory-content-${tag.slug()}`} style={cardStyle} route={app.route.tag(tag)}>
           <div class="TagCategory-alignStart">
             <div class="TagCategory-alignStart-main">
               <span class="TagCategory-icon">{this.iconItems().toArray()}</span>
@@ -172,8 +172,8 @@ export default class Category extends Component {
     return items;
   }
 
-  config(isInitialized) {
-    if (isInitialized) return;
+  oncreate(vnode) {
+    super.oncreate(vnode);
 
     this.$('.TagCategory-content,.TagCategory-toggleArrow').bind('mouseenter', function (e) {
       $(this).addClass('hover');
@@ -195,11 +195,5 @@ export default class Category extends Component {
     e.stopPropagation();
     this.collapsed = !this.collapsed;
     m.redraw();
-  }
-
-  stopProp(element, isInitialized) {
-    if (isInitialized) return;
-    $(element).on('click', (e) => e.stopPropagation());
-    m.route.apply(this, arguments);
   }
 }

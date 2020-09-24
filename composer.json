@@ -7,8 +7,9 @@
   "type": "flarum-extension",
   "license": "MIT",
   "require": {
-    "flarum/core": "^0.1.0-beta.13",
-    "fof/components": ">=0.1.0"
+    "flarum/core": "^0.1.0-beta.14",
+    "flarum/tags": "^0.1.0-beta.14",
+    "fof/components": ">=0.1.1"
   },
   "authors": [
     {

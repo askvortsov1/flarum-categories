@@ -3,6 +3,7 @@ import avatar from 'flarum/helpers/avatar';
 import username from 'flarum/helpers/username';
 import humanTime from 'flarum/helpers/humanTime';
 import { truncate } from 'flarum/utils/string';
+import Link from 'flarum/components/Link';
 import UserCard from 'flarum/components/UserCard';
 
 export default class LastDiscussionWidget extends Component {
@@ -37,22 +38,22 @@ export default class LastDiscussionWidget extends Component {
     }
 
     return (
-      <a class="LastDiscussion" route={app.route.discussion(discussion)}>
-        <a className="LastDiscussion-avatar" route={user ? app.route.user(user) : '#'}>
+      <Link class="LastDiscussion" href={app.route.discussion(discussion)}>
+        <Link className="LastDiscussion-avatar" href={user ? app.route.user(user) : '#'}>
           {avatar(user)}
-        </a>
+        </Link>
         <div class="LastDiscussion-content">
           <div class="LastDiscussion-bottomRow">
             {humanTime(discussion.lastPostedAt())}{' '}
-            <a className="LastDiscussion-usernameLink" route={user ? app.route.user(user) : '#'}>
+            <Link className="LastDiscussion-usernameLink" href={user ? app.route.user(user) : '#'}>
               {' '}
               | {username(user)}
-            </a>
+            </Link>
           </div>
           <div class="LastDiscussion-topRow">{truncate(discussion.title(), 26)}</div>
         </div>
         <div class="LastDiscussion-userCardContainer">{card}</div>
-      </a>
+      </Link>
     );
   }
 

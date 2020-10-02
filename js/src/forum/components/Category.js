@@ -1,4 +1,5 @@
 import Component from 'flarum/Component';
+import Link from 'flarum/components/Link';
 
 import icon from 'flarum/helpers/icon';
 import ItemList from 'flarum/utils/ItemList';
@@ -55,7 +56,7 @@ export default class Category extends Component {
 
     return (
       <li class={classNames.join(' ')}>
-        <a class={`TagCategory-content TagCategory-content-${tag.slug()}`} style={cardStyle} route={app.route.tag(tag)}>
+        <Link class={`TagCategory-content TagCategory-content-${tag.slug()}`} style={cardStyle} href={app.route.tag(tag)}>
           <div class="TagCategory-alignStart">
             <div class="TagCategory-alignStart-main">
               <span class="TagCategory-icon">{this.iconItems().toArray()}</span>
@@ -79,7 +80,7 @@ export default class Category extends Component {
             <div class={lastDiscussionClassNames}>{this.lastDiscussionItems().toArray()}</div>
           </div>
           {childrenInContent && !this.collapsed ? renderedChildren : ''}
-        </a>
+        </Link>
         {!childrenInContent && !this.isChild ? renderedChildren : ''}
       </li>
     );

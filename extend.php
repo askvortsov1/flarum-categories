@@ -78,7 +78,7 @@ return [
         }),
 
     (new Extend\ApiSerializer(BasicUserSerializer::class))
-        ->attribute('joinTime', function ($serializer, $model)  {
+        ->attribute('joinTime', function ($serializer, $model) {
             if ($serializer->getActor()->can('viewUserList')) {
                 return $serializer->formatDate($model->joined_at);
             }

@@ -1,0 +1,34 @@
+askvortsov-categories:
+  admin:
+    basics:
+      categories_label: Категории
+    labels:
+      keep_tags_nav: Сохранить ссылку на страницу категорий на боковой панели навигации?
+      child_bare_icon: Должны ли значки дочерних категорий отображаться без круглого фона?
+      compact_mobile_mode: Компактный мобильный режим
+      full_page_desktop: Следует ли свернуть навигационное меню боковой панели в строку (как на традиционной странице тегов)? Это также скроет виджеты (например, статистику форума, друзей) на панели навигации страницы категорий.
+      parent_remove_icon: Скрыть значки для категорий верхнего уровня?
+      parent_remove_description: Скрыть описания для категорий верхнего уровня?
+      parent_remove_stats: Скрыть статистику для категорий верхнего уровня?
+      parent_remove_last_discussion: Скрыть последние обсуждения категории верхнего уровня?
+      small_forum_optimized: Оптимизировать для небольших форумов? Это даст более точное количество обсуждений / сообщений, но значительно замедлит работу средних и крупных форумов.
+    headings:
+      nav: Навигация
+      layout: Макет
+      parent_display: Отображение родительской категории
+      child_display: Отображение дочерней категории
+      performance: Performance / not ru
+    title: Настройки категории
+  forum:
+    categories:
+    header:
+      back_to_categories_tooltip: Вернутся к категориям
+    index:
+      categories_link: Категории
+    meta:
+      categories_title: Категории
+    stat-widgets:
+      discussion_label: Обсуждения
+      post_label: Посты
+    last_discussion_widget:
+      no_discussions: Сейчас тут пусто, давайте заполним вместе?

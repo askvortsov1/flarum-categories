@@ -31,30 +31,14 @@ return [
         ->css(__DIR__.'/resources/less/admin.less'),
 
     (new Extend\Settings())
-        ->serializeToForum('categories.keepTagsNav', 'askvortsov-categories.keep-tags-nav', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.fullPageDesktop', 'askvortsov-categories.full-page-desktop', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.compactMobile', 'askvortsov-categories.compact-mobile', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.parentRemoveIcon', 'askvortsov-categories.parent-remove-icon', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.parentRemoveDescription', 'askvortsov-categories.parent-remove-description', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.parentRemoveStats', 'askvortsov-categories.parent-remove-stats', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.parentRemoveLastDiscussion', 'askvortsov-categories.parent-remove-last-discussion', function ($val) {
-            return (bool) $val;
-        })
-        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', function ($val) {
-            return (bool) $val;
-        }),
+        ->serializeToForum('categories.keepTagsNav', 'askvortsov-categories.keep-tags-nav', 'boolval')
+        ->serializeToForum('categories.fullPageDesktop', 'askvortsov-categories.full-page-desktop', 'boolval')
+        ->serializeToForum('categories.compactMobile', 'askvortsov-categories.compact-mobile', 'boolval')
+        ->serializeToForum('categories.parentRemoveIcon', 'askvortsov-categories.parent-remove-icon', 'boolval')
+        ->serializeToForum('categories.parentRemoveDescription', 'askvortsov-categories.parent-remove-description', 'boolval')
+        ->serializeToForum('categories.parentRemoveStats', 'askvortsov-categories.parent-remove-stats', 'boolval')
+        ->serializeToForum('categories.parentRemoveLastDiscussion', 'askvortsov-categories.parent-remove-last-discussion', 'boolval')
+        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval'),
 
     (new Extend\ApiController(ShowForumController::class))
         ->addInclude('tags.lastPostedDiscussion.lastPostedUser'),

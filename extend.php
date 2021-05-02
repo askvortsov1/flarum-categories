@@ -13,6 +13,7 @@ namespace Askvortsov\FlarumCategories;
 
 use Flarum\Api\Controller\ShowForumController;
 use Flarum\Api\Serializer\BasicUserSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
 use Flarum\Post\Event\Hidden;
 use Flarum\Post\Event\Posted;
@@ -38,14 +39,14 @@ return [
         ->serializeToForum('categories.parentRemoveDescription', 'askvortsov-categories.parent-remove-description', 'boolval')
         ->serializeToForum('categories.parentRemoveStats', 'askvortsov-categories.parent-remove-stats', 'boolval')
         ->serializeToForum('categories.parentRemoveLastDiscussion', 'askvortsov-categories.parent-remove-last-discussion', 'boolval')
-        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval'),
+        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval', true),
 
     (new Extend\ApiController(ShowForumController::class))
         ->addInclude('tags.lastPostedDiscussion.lastPostedUser'),
 
     (new Extend\ApiSerializer(TagSerializer::class))
-        ->mutate(function ($serializer, $model, $attributes) {
-            $settings = app(SettingsRepositoryInterface::class);
+        ->attributes(function ($serializer, $model, $attributes) {
+            $settings = resolve(SettingsRepositoryInterface::class);
             if ($settings->get('askvortsov-categories.small-forum-optimized', false)) {
                 $result = $model->discussions()
                     ->selectRaw('sum(comment_count) as postCount, count(id) as discussionCount')
@@ -63,9 +64,12 @@ return [
 
     (new Extend\ApiSerializer(BasicUserSerializer::class))
         ->attribute('joinTime', function ($serializer, $model) {
-            if ($serializer->getActor()->can('viewUserList')) {
-                return $serializer->formatDate($model->joined_at);
-            }
+            return $serializer->formatDate($model->joined_at);
+        }),
+
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->attribute('categories.childBareIcon', function ($serializer, $model, $attributes) {
+            return boolval(resolve(SettingsRepositoryInterface::class)->get('askvortsov-categories.child-bare-icon', true));
         }),
 
     new Extend\Locales(__DIR__.'/resources/locale'),

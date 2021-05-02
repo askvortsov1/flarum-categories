@@ -1,7 +1,7 @@
-import { extend } from 'flarum/extend';
-import IndexPage from 'flarum/components/IndexPage';
-import LinkButton from 'flarum/components/LinkButton';
-import Model from 'flarum/Model';
+import { extend } from 'flarum/common/extend';
+import IndexPage from 'flarum/forum/components/IndexPage';
+import LinkButton from 'flarum/common/components/LinkButton';
+import Model from 'flarum/common/Model';
 import Tag from 'flarum/tags/models/Tag';
 import CategoriesPage from './components/CategoriesPage';
 

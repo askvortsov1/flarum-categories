@@ -1,10 +1,10 @@
-import Component from 'flarum/Component';
-import avatar from 'flarum/helpers/avatar';
-import username from 'flarum/helpers/username';
-import humanTime from 'flarum/helpers/humanTime';
-import { truncate } from 'flarum/utils/string';
-import Link from 'flarum/components/Link';
-import UserCard from 'flarum/components/UserCard';
+import Component from 'flarum/common/Component';
+import avatar from 'flarum/common/helpers/avatar';
+import username from 'flarum/common/helpers/username';
+import humanTime from 'flarum/common/helpers/humanTime';
+import { truncate } from 'flarum/common/utils/string';
+import Link from 'flarum/common/components/Link';
+import UserCard from 'flarum/forum/components/UserCard';
 
 export default class LastDiscussionWidget extends Component {
   oninit(vnode) {

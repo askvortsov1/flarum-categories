@@ -1,8 +1,8 @@
-import { extend } from 'flarum/extend';
-import Page from 'flarum/components/Page';
-import AffixedSidebar from 'flarum/components/AffixedSidebar';
-import IndexPage from 'flarum/components/IndexPage';
-import listItems from 'flarum/helpers/listItems';
+import { extend } from 'flarum/common/extend';
+import Page from 'flarum/common/components/Page';
+import AffixedSidebar from 'flarum/forum/components/AffixedSidebar';
+import IndexPage from 'flarum/forum/components/IndexPage';
+import listItems from 'flarum/common/helpers/listItems';
 
 import sortTags from 'flarum/tags/utils/sortTags';
 import tagLabel from 'flarum/tags/helpers/tagLabel';

@@ -1,8 +1,8 @@
-import Component from 'flarum/Component';
-import Link from 'flarum/components/Link';
+import Component from 'flarum/common/Component';
+import Link from 'flarum/common/components/Link';
 
-import icon from 'flarum/helpers/icon';
-import ItemList from 'flarum/utils/ItemList';
+import icon from 'flarum/common/helpers/icon';
+import ItemList from 'flarum/common/utils/ItemList';
 import sortTags from 'flarum/tags/utils/sortTags';
 
 import StatWidget from './StatWidget';

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-categories
+ *
+ *  Copyright (c) 2021 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumCategories\Content;
 
 use Flarum\Api\Client;
@@ -45,12 +54,12 @@ class Categories
     protected $url;
 
     /**
-     * @param Client $api
-     * @param Factory $view
-     * @param TagRepository $tags
-     * @param TranslatorInterface $translator
+     * @param Client                      $api
+     * @param Factory                     $view
+     * @param TagRepository               $tags
+     * @param TranslatorInterface         $translator
      * @param SettingsRepositoryInterface $settings
-     * @param UrlGenerator $url
+     * @param UrlGenerator                $url
      */
     public function __construct(
         Client $api,
@@ -67,7 +76,7 @@ class Categories
         $this->translator = $translator;
         $this->url = $url;
     }
-    
+
     public function __invoke(Document $document, Request $request)
     {
         $apiDocument = $this->getTagsDocument($request);
@@ -83,7 +92,6 @@ class Categories
             return [$tag['id'] => $childTags->whereIn('id', $childIds)->sortBy('position')];
         });
 
-
         $defaultRoute = $this->settings->get('default_route');
         $document->title = $this->translator->trans('askvortsov-categories.forum.all_categories.meta_title_text');
         $document->meta['description'] = $this->translator->trans('askvortsov-categories.forum.all_categories.meta_description_text');
@@ -97,7 +105,7 @@ class Categories
     private function getTagsDocument(Request $request)
     {
         return json_decode($this->api->withParentRequest($request)->withQueryParams([
-            'include' => 'children,lastPostedDiscussion,lastPostedDiscussion.lastPostedUser'
+            'include' => 'children,lastPostedDiscussion,lastPostedDiscussion.lastPostedUser',
         ])->get('/tags')->getBody(), true);
     }
 }

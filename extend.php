@@ -67,11 +67,6 @@ return [
             return $serializer->formatDate($model->joined_at);
         }),
 
-    (new Extend\ApiSerializer(ForumSerializer::class))
-        ->attribute('categories.childBareIcon', function ($serializer, $model, $attributes) {
-            return boolval(resolve(SettingsRepositoryInterface::class)->get('askvortsov-categories.child-bare-icon', true));
-        }),
-
     new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\Event())

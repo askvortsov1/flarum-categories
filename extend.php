@@ -11,21 +11,21 @@
 
 namespace Askvortsov\FlarumCategories;
 
-use Flarum\Api\Controller\ShowForumController;
+use Askvortsov\FlarumCategories\Content\Categories;
 use Flarum\Api\Serializer\BasicUserSerializer;
-use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
 use Flarum\Post\Event\Hidden;
 use Flarum\Post\Event\Posted;
 use Flarum\Post\Event\Restored;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Api\Controller\ListTagsController;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less')
-        ->route('/categories', 'categories'),
+        ->route('/categories', 'categories', Categories::class),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
@@ -41,8 +41,8 @@ return [
         ->serializeToForum('categories.parentRemoveLastDiscussion', 'askvortsov-categories.parent-remove-last-discussion', 'boolval')
         ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval', true),
 
-    (new Extend\ApiController(ShowForumController::class))
-        ->addInclude('tags.lastPostedDiscussion.lastPostedUser'),
+    (new Extend\ApiController(ListTagsController::class))
+        ->addOptionalInclude('lastPostedDiscussion.lastPostedUser'),
 
     (new Extend\ApiSerializer(TagSerializer::class))
         ->attributes(function ($serializer, $model, $attributes) {

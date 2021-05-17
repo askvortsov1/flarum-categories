@@ -1,36 +1,45 @@
-import { extend } from 'flarum/common/extend';
 import Page from 'flarum/common/components/Page';
+import LoadingIndicator from 'flarum/common/components/LoadingIndicator';
 import AffixedSidebar from 'flarum/forum/components/AffixedSidebar';
 import IndexPage from 'flarum/forum/components/IndexPage';
 import listItems from 'flarum/common/helpers/listItems';
 
 import sortTags from 'flarum/tags/utils/sortTags';
 import tagLabel from 'flarum/tags/helpers/tagLabel';
-import TagsPage from 'flarum/tags/components/TagsPage';
 
 import Category from './Category';
 
-export default class CategoriesPage extends TagsPage {
+export default class CategoriesPage extends Page {
   oninit(vnode) {
-    Page.prototype.oninit.call(this, vnode);
-
-    this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.parent()));
+    super.oninit(vnode);
 
     app.history.push('categories', app.translator.trans('askvortsov-category.forum.header.back_to_categories_tooltip'));
 
-    extend(IndexPage.prototype, 'sidebarItems', function (items) {
-      if (app.current instanceof CategoriesPage && app.forum.attribute('categories.fullPageDesktop')) {
-        for (const item in items.items) {
-          if (item != 'newDiscussion' && item != 'nav') {
-            items.remove(item);
-          }
-        }
-      }
-      return items;
+    this.tags = [];
+
+    const preloaded = app.preloadedApiDocument();
+
+    if (preloaded) {
+      this.tags = sortTags(preloaded.filter((tag) => !tag.isChild()));
+      return;
+    }
+
+    this.loading = true;
+
+    app.tagList.load(['children', 'lastPostedDiscussion', 'lastPostedDiscussion.lastPostedUser']).then(() => {
+      this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.isChild()));
+
+      this.loading = false;
+
+      m.redraw();
     });
   }
 
   view() {
+    if (this.loading) {
+      return <LoadingIndicator />;
+    }
+
     const pinned = this.tags.filter((tag) => tag.position() !== null);
     const cloud = this.tags.filter((tag) => tag.position() === null);
 
@@ -65,6 +74,6 @@ export default class CategoriesPage extends TagsPage {
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    app.setTitle(app.translator.trans('askvortsov-categories.forum.meta.categories_title'));
+    app.setTitle(app.translator.trans('askvortsov-categories.forum.all_categories.meta_title_text'));
   }
 }

@@ -32,7 +32,7 @@ export default class Category extends Component {
 
     this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
 
-    const children = this.isChild ? [] : sortTags(app.store.all('tags').filter((child) => child.parent() === tag));
+    const children = this.isChild ? [] : sortTags(tag.children() || []);
 
     const cardStyle = this.isChild ? {} : { backgroundColor: tag.color() };
 

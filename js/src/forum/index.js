@@ -31,4 +31,15 @@ app.initializers.add('askvortsov/flarum-categories', () => {
 
     return items;
   });
+
+  extend(IndexPage.prototype, 'sidebarItems', function (items) {
+    if (app.current.matches(CategoriesPage) && app.forum.attribute('categories.fullPageDesktop')) {
+      for (const item in items.items) {
+        if (item !== 'newDiscussion' && item !== 'nav') {
+          items.remove(item);
+        }
+      }
+    }
+    return items;
+  });
 });

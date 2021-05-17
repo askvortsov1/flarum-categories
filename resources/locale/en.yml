@@ -23,16 +23,20 @@ askvortsov-categories:
       child_display: Child Category Display
       performance: Performance
     title: Categories Settings
+
   forum:
-    categories:
+    all_categories:
+      meta_description_text: All Categories
+      meta_title_text: => askvortsov-categories.ref.categories
     header:
       back_to_categories_tooltip: Back to Categories
     index:
-      categories_link: Categories
-    meta:
-      categories_title: Categories
+      categories_link: => askvortsov-categories.ref.categories
     stat-widgets:
       discussion_label: Discussions
       post_label: Posts
     last_discussion_widget:
       no_discussions: No Discussions (Yet!)
+
+  ref:
+    categories: Categories

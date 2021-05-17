@@ -17,6 +17,7 @@ app.initializers.add('askvortsov/flarum-categories', () => {
     .registerSetting({
       setting: 'askvortsov-categories.full-page-desktop',
       label: app.translator.trans('askvortsov-categories.admin.labels.full_page_desktop'),
+      help: app.translator.trans('askvortsov-categories.admin.help.full_page_desktop'),
       type: 'switch',
     })
     .registerSetting({
@@ -49,6 +50,7 @@ app.initializers.add('askvortsov/flarum-categories', () => {
     .registerSetting({
       setting: 'askvortsov-categories.child-bare-icon',
       label: app.translator.trans('askvortsov-categories.admin.labels.child_bare_icon'),
+      help: app.translator.trans('askvortsov-categories.admin.help.child_bare_icon'),
       type: 'switch',
     })
     .registerSetting(() => <legend class="categories-legend">{app.translator.trans('askvortsov-categories.admin.headings.performance')}</legend>)

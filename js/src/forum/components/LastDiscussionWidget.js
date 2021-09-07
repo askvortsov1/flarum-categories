@@ -38,7 +38,7 @@ export default class LastDiscussionWidget extends Component {
     }
 
     return (
-      <Link class="LastDiscussion" href={app.route.discussion(discussion)}>
+      <Link class="LastDiscussion" href={app.route.discussion(discussion, discussion.lastPostNumber())}>
         <Link className="LastDiscussion-avatar" href={user ? app.route.user(user) : '#'}>
           {avatar(user)}
         </Link>

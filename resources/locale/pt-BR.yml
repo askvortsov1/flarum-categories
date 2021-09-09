@@ -1,0 +1,42 @@
+askvortsov-categories:
+  admin:
+    basics:
+      categories_label: Categorias
+    labels:
+      keep_tags_nav: Manter o link da página de tags na barra lateral de navegação?
+      child_bare_icon: Ícones de items filhos vazios?
+      compact_mobile_mode: Modo mobile compacto
+      full_page_desktop: Área de trabalho de página inteira?
+      parent_remove_icon: Ocultar ícones para tags de nível superior?
+      parent_remove_description: Ocultar as descrições das tags de nível superior?
+      parent_remove_stats: Ocultar estatísticas para tags de nível superior?
+      parent_remove_last_discussion: Ocultar as discussões mais recentes para tags de nível superior?
+      small_forum_optimized: Otimizar para fóruns pequenos?
+    help:
+      child_bare_icon: Os ícones nas categorias secundárias devem ser exibidos sem um fundo circular?
+      full_page_desktop: O menu de navegação da barra lateral deve ser reduzido a uma linha (como na página de tags tradicional)? Isso também ocultará widgets (como Amigos em Estatísticas do Fórum Flarum) da barra de navegação da página de categorias.
+      small_forum_optimized:  Isso fornecerá contagens de discussão/postagens mais precisas, mas reduzirá drasticamente a velocidade dos fóruns de médio e grande porte.
+    headings:
+      nav: Navegação
+      layout: Layout
+      parent_display: Exibição da categoria pai
+      child_display: Exibição de categoria filha
+      performance: Performance
+    title: Configurações de categorias
+
+  forum:
+    all_categories:
+      meta_description_text: Todas as categorias
+      meta_title_text: => askvortsov-categories.ref.categories
+    header:
+      back_to_categories_tooltip: Boltar para aategorias
+    index:
+      categories_link: => askvortsov-categories.ref.categories
+    stat-widgets:
+      discussion_label: Discussões
+      post_label: Posts
+    last_discussion_widget:
+      no_discussions: Nenhuma discussão (ainda!)
+
+  ref:
+    categories: Categorias

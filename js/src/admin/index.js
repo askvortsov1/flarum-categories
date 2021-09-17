@@ -57,6 +57,7 @@ app.initializers.add('askvortsov/flarum-categories', () => {
     .registerSetting({
       setting: 'askvortsov-categories.small-forum-optimized',
       label: app.translator.trans('askvortsov-categories.admin.labels.small_forum_optimized'),
+      help: app.translator.trans('askvortsov-categories.admin.help.small_forum_optimized'),
       type: 'switch',
     });
 

@@ -26,7 +26,7 @@ export default class CategoriesPage extends Page {
 
     this.loading = true;
 
-    app.tagList.load(['children', 'lastPostedDiscussion', 'lastPostedDiscussion.lastPostedUser']).then(() => {
+    app.tagList.load(['parent', 'children', 'lastPostedDiscussion', 'lastPostedDiscussion.lastPostedUser']).then(() => {
       this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.isChild()));
 
       this.loading = false;

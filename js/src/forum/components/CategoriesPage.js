@@ -26,15 +26,13 @@ export default class CategoriesPage extends Page {
 
     this.loading = true;
 
-    app.tagList
-      .load(['parent', 'children', 'lastPostedDiscussion', 'children.parent', 'parent.children.parent', 'lastPostedDiscussion.lastPostedUser'])
-      .then(() => {
-        this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.isChild()));
+    app.tagList.load(['parent', 'children', 'lastPostedDiscussion', 'lastPostedDiscussion.lastPostedUser']).then(() => {
+      this.tags = sortTags(app.store.all('tags').filter((tag) => !tag.isChild()));
 
-        this.loading = false;
+      this.loading = false;
 
-        m.redraw();
-      });
+      m.redraw();
+    });
   }
 
   view() {

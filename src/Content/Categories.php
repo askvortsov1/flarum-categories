@@ -105,7 +105,7 @@ class Categories
     private function getTagsDocument(Request $request)
     {
         return json_decode($this->api->withParentRequest($request)->withQueryParams([
-            'include' => 'children,lastPostedDiscussion,lastPostedDiscussion.lastPostedUser',
+            'include' => 'children,parent,lastPostedDiscussion,lastPostedDiscussion.lastPostedUser',
         ])->get('/tags')->getBody(), true);
     }
 }

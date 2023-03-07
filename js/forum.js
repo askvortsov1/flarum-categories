@@ -1,1 +1,1 @@
-export * from './src/forum';
+export { default } from "./src/forum";

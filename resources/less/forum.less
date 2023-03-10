@@ -34,6 +34,22 @@
   @categories-sub-color-more-muted: @categories-sub-dark-color-more-muted;
 }
 
+.Categories-showOnMobile {
+  display: none;
+}
+
+.Categories-compactMobileModeEnabled {
+  @media @phone {
+    .Categories-showOnMobile {
+      display: unset;
+    }
+
+    .Categories-hideOnMobile {
+      display: none;
+    }
+  }
+}
+
 // Systems
 .TagCategory {
   list-style: none;

@@ -44,7 +44,7 @@ export default class Category extends Component<Attrs> {
       return null;
     }
 
-    this.compactMobileMode = window.innerWidth <= 767 && app.forum.attribute('categories.compactMobile');
+    this.compactMobileMode = !!app.forum.attribute('categories.compactMobile');
 
     return (
       <li

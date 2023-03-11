@@ -208,7 +208,7 @@ export default class Category extends Component<Attrs> {
       items.add(
         'discussionCount',
         StatWidget.component({
-          count: this.tag.discussionCount(),
+          count: Intl.NumberFormat().format(this.tag.discussionCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label'),
           icon: 'fas fa-file-alt',
         }),
@@ -218,7 +218,7 @@ export default class Category extends Component<Attrs> {
       items.add(
         'postCount',
         StatWidget.component({
-          count: this.tag.postCount(),
+          count: Intl.NumberFormat().format(this.tag.postCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label'),
           icon: 'fas fa-comment',
         }),

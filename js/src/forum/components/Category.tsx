@@ -69,7 +69,7 @@ export default class Category extends Component<Attrs> {
       'link',
       <Link
         className={`TagCategory-content TagCategory-content-${tag.slug()}`}
-        style={`${this.isChild ? {} : { backgroundColor: tag.color() }}`}
+        style={this.isChild ? {} : { backgroundColor: tag.color() }}
         href={app.route.tag(tag)}
       >
         {this.contentItems().toArray()}

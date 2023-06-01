@@ -14,12 +14,19 @@ namespace Askvortsov\FlarumCategories;
 use Askvortsov\FlarumCategories\Content\Categories;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Extend;
+use Flarum\Extend\ApiSerializer;
+use Flarum\Extend\Event;
 use Flarum\Post\Event\Hidden;
 use Flarum\Post\Event\Posted;
 use Flarum\Post\Event\Restored;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Controller\ListTagsController;
 use Flarum\Tags\Api\Serializer\TagSerializer;
+use Flarum\Tags\Event\Creating;
+use Flarum\Tags\Event\Saving;
+use Askvortsov\FlarumCategories\Attributes\TagAttributes;
+use Askvortsov\FlarumCategories\Listeners\CreateTagAttributes;
+use Askvortsov\FlarumCategories\Listeners\SaveTagAttributes;
 
 return [
     (new Extend\Frontend('forum'))
@@ -79,4 +86,8 @@ return [
         ->listen(Restored::class, function (Restored $event) {
             Util::updateTagsPostCount($event->post, 1);
         }),
+
+    (new ApiSerializer(TagSerializer::class))->attributes(TagAttributes::class),
+    (new Event())->listen(Saving::class, SaveTagAttributes::class),
+    (new Event())->listen(Creating::class, CreateTagAttributes::class),
 ];

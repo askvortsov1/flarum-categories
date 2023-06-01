@@ -1,5 +1,7 @@
 import { extend } from 'flarum/common/extend';
 import BasicsPage from 'flarum/admin/components/BasicsPage';
+import app from 'flarum/admin/app'
+import extendTagEditModal from "./extend/extendEditTagModal";
 
 app.initializers.add('askvortsov/flarum-categories', () => {
   app.extensionData
@@ -67,4 +69,6 @@ app.initializers.add('askvortsov/flarum-categories', () => {
       label: app.translator.trans('askvortsov-categories.admin.basics.categories_label'),
     });
   });
+
+  extendTagEditModal();
 });

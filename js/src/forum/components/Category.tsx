@@ -65,11 +65,13 @@ export default class Category extends Component<Attrs> {
 
     const children = this.isChild ? [] : sortTags(tag.children() || []);
 
+    console.log(tag)
+
     items.add(
       'link',
       <Link
         className={`TagCategory-content TagCategory-content-${tag.slug()}`}
-        style={this.isChild ?  {color: tag.fontColor} : { color: tag.fontColor}}
+        style={this.isChild ?  {color: tag.fontColor} : { color: tag.color()}}
         href={app.route.tag(tag)}
       >
         {this.contentItems().toArray()}

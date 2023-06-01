@@ -18,7 +18,7 @@ export default function extendTagEditModal() {
     items.add(
       'font-color',
       <div className="Form-group">
-        <label>{app.translator.trans('flarum-tags.admin.edit_tag.font_color_label')}</label>
+        <label>{app.translator.trans('askvortsov-categories.admin.edit_tag.font_color_label')}</label>
         <ColorPreviewInput className="FormControl" placeholder="#000000" bidi={this.fontColor} />
       </div>,
       20

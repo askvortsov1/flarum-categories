@@ -23,6 +23,8 @@ askvortsov-categories:
       child_display: Child Category Display
       performance: Performance
     title: Categories Settings
+    edit_tag:
+      font_color_label: Font colour
 
   forum:
     all_categories:

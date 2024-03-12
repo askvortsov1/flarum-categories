@@ -211,8 +211,10 @@ export default class Category extends Component<Attrs> {
       let iconClasses = 'fa-stack-1x CategoryIcon';
 
       if (app.forum.attribute('categories.childBareIcon')) {
-        style.color = this.tag.color();
         iconClasses += ' NoBackgroundCategoryIcon';
+        style.color = '#fafafa';
+      } else {
+        style.color = this.tag.color();
       }
 
       const classes = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';

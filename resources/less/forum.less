@@ -80,12 +80,14 @@
     .TagCategory-icon,
     .TagCategory-main,
     .TagCategory-stats,
+    .TagCategory-locked,
     .TagCategory-lastDiscussion {
       display: flex;
     }
 
     .TagCategory-icon,
     .TagCategory-stats,
+    .TagCategory-locked,
     .TagCategory-lastDiscussion {
       align-items: center;
     }
@@ -210,6 +212,22 @@
   font-weight: 550;
 }
 
+.LockedText {
+  display: flex;
+  align-items: center;
+  color: @categories-color-highlighted;
+
+  .LockedText-content,
+  .LockedText-topRow,
+  .LockedText-bottomRow {
+    display: flex;
+  }
+  .LockedText-topRow {
+    color: @categories-color-white;
+    font-weight: 550;
+  }
+}
+
 .LastDiscussion {
   display: flex;
   align-items: center;
@@ -312,6 +330,16 @@
     }
   }
 
+  .TagCategory-lockedText {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    padding: 7px 0;
+  }
+
+  .LockedText-content {
+    flex-direction: row-reverse;
+  }
+
   .TagCategory-lastDiscussion {
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     margin-top: 10px;
@@ -371,6 +399,13 @@
     border-top: none;
     margin-top: 0;
     padding: 0 15px;
+  }
+
+  .TagCategory-lockedText {
+    border-top: none;
+    margin-top: 0;
+    padding: 0 15px;
+    width: 280px;
   }
 
   .LastDiscussion-avatar {
@@ -458,6 +493,10 @@
             display: none;
           }
         }
+        .TagCategory-lockedText {
+          margin-top: 0;
+          border-top: 0;
+        }
       }
       .TagCategory-subTagList {
         > :last-child {
@@ -487,6 +526,9 @@
       border-top: 0;
 
       .TagCategory-lastDiscussion {
+        display: none;
+      }
+      .TagCategory-lockedText {
         display: none;
       }
     }

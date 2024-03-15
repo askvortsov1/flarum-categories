@@ -17,11 +17,18 @@ interface Attrs {
   parent: any;
 }
 
+interface TagLocked {
+  icon: icon;
+  text: string;
+  isVisible: boolean;
+}
+
 export default class Category extends Component<Attrs> {
   tag!: any;
   isChild!: boolean;
   collapsed!: boolean;
   compactMobileMode!: boolean;
+  tagLocked!: TagLocked;
 
   oninit(vnode) {
     super.oninit(vnode);
@@ -32,6 +39,17 @@ export default class Category extends Component<Attrs> {
 
     this.collapsed = false;
 
+    // Identify if the tag has been Goup or Password protected with flarum-tag-passwords extension.
+    if (typeof this.tag.isUnlocked == 'function') {
+      if ((this.tag.isGroupProtected() || this.tag.isPasswordProtected()) && !this.tag.isUnlocked()) {
+        this.tagLocked = {
+          icon: this.tag.isPasswordProtected() ? icon('fas fa-lock') : icon('fas fa-user-lock'),
+          text: this.tag.isPasswordProtected() ? app.translator.trans('datlechin-tag-passwords.forum.tags_page.password_protected') : app.translator.trans('datlechin-tag-passwords.forum.tags_page.group_protected'),
+          isVisible: this.tag.isProtectedTagDisplayedForTagsPage() == true
+        };
+      }
+    }
+
     window.addEventListener('resize', function () {
       m.redraw();
     });
@@ -41,6 +59,9 @@ export default class Category extends Component<Attrs> {
     const tag = this.tag;
 
     if (!tag) {
+      return null;
+    } else if (this.tagLocked && !this.tagLocked.isVisible) {
+      // Hide the navigation when protected Tag in 'Tag Passwords > Display protected Tag in Tags page navigation' is disabled
       return null;
     }
 
@@ -68,7 +89,7 @@ export default class Category extends Component<Attrs> {
     items.add(
       'link',
       <Link
-        className={`TagCategory-content TagCategory-content-${tag.slug()}`}
+        className={`TagCategory-content ${app.forum.attribute('categories.compactMobile')? 'compactMobile' : '' } TagCategory-content-${tag.slug()}`}
         style={this.isChild ? {} : { backgroundColor: tag.color() }}
         href={app.route.tag(tag)}
       >
@@ -142,6 +163,11 @@ export default class Category extends Component<Attrs> {
   alignEndItems() {
     const items = new ItemList();
 
+    if (this.tagLocked) {
+      items.add('locked', <div className="TagCategory-locked">{this.lockedItems().toArray()}</div>, 100);
+      return items;
+    }
+
     const tag = this.tag;
 
     items.add('stats', <div className="TagCategory-stats StatWidgetList">{this.statItems().toArray()}</div>, 100);
@@ -155,6 +181,27 @@ export default class Category extends Component<Attrs> {
     return items;
   }
 
+  lockedItems() {
+    const items = new ItemList();
+    const classes = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';
+    items.add(
+      'icon',
+      <span className={classes}>
+        {
+          <i className="fa-stack-2x" style={{ color: this.tag.color() }}></i>
+        }
+        {this.tagLocked.icon}
+      </span>,
+      10
+    );
+    items.add(
+      'LockedText',
+      <div className={classList('TagCategory-lockedText')}>{this.tagLocked.text}</div>,
+      50
+    );
+    return items;
+  }
+
   iconItems() {
     const items = new ItemList();
 
@@ -164,8 +211,10 @@ export default class Category extends Component<Attrs> {
       let iconClasses = 'fa-stack-1x CategoryIcon';
 
       if (app.forum.attribute('categories.childBareIcon')) {
-        style.color = this.tag.color();
         iconClasses += ' NoBackgroundCategoryIcon';
+        style.color = '#fafafa';
+      } else {
+        style.color = this.tag.color();
       }
 
       const classes = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';

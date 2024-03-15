@@ -9,10 +9,19 @@ import LastDiscussionWidget from './components/LastDiscussionWidget';
 import StatWidget from './components/StatWidget';
 
 function pruneIndexNav(items, func) {
-  if (app.current.matches(CategoriesPage) && app.forum.attribute('categories.fullPageDesktop')) {
+  const isTagsVisible = !app.forum.attribute('categories.keep-tags-nav');
+
+  if (app.current.matches(CategoriesPage)) {
     for (const item in items.items) {
       if (func(item)) {
-        items.remove(item);
+        if(item == 'tags' && isTagsVisible) {
+          /*
+           * Tags must be visible on the navibation bar, when the User has selected to keep Tags within the Extension Settings.
+           * Finding all items that begins with 'tag' will also load 'tags', due to custom tag are labelled 'tag1', 'tag2' and so-on
+           */
+        } else {
+          items.remove(item);
+        }
       }
     }
   }
@@ -27,9 +36,6 @@ app.initializers.add('askvortsov/flarum-categories', () => {
   Tag.prototype.postCount = Model.attribute('postCount');
 
   extend(IndexPage.prototype, 'navItems', function (items) {
-    if (items.has('tags') && !app.forum.attribute('categories.keepTagsNav')) {
-      items.remove('tags');
-    }
     items.add(
       'categories',
       <LinkButton icon="fas fa-th-list" href={app.route('categories')}>

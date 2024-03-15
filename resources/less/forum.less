@@ -50,6 +50,197 @@
   }
 }
 
+/* Recreate sideNav but keep horizontal styling */
+.topNav>ul {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
+
+@media (min-width: 768px) {
+  .topNav .Dropdown--select {
+    display:block
+  }
+
+  .topNav .Dropdown--select .Dropdown-toggle {
+    display: none
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu {
+    display: block;
+    border: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    float: none;
+    position: static;
+    background: none;
+    box-shadow: none
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li>a {
+    padding: 8px 0 8px 30px;
+    color: var(--topNav-color, var(--muted-color))
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li>a:hover {
+    background: none;
+    color: var(--topNav-color-hover, var(--link-color));
+    text-decoration: none
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li>a .Button-icon {
+    float: left;
+    margin-left: -30px;
+    font-size: 15px
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li.active>a {
+    background: none;
+    color: var(--topNav-color-active, var(--primary-color));
+    font-weight: bold
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>.Dropdown-separator {
+    background: none
+  }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .topNav {
+    padding:15px 0;
+    white-space: nowrap;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+  }
+
+  .topNav:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 15px;
+    border-bottom: 1px solid var(--control-bg)
+  }
+
+  .topNav>ul>li,.topNav .Dropdown-menu>li {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    vertical-align: top
+  }
+
+  .topNav .Dropdown-separator {
+    display: none
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li>a {
+    padding-left: 25px
+  }
+
+  .topNav .Dropdown--select .Dropdown-menu>li>a .icon {
+    margin-left: -25px
+  }
+
+  .topNav .affix {
+    position: static
+  }
+}
+
+@media (min-width: 992px) {
+  .CategoriesPage .topNav {
+    padding:15px 0;
+    white-space: nowrap;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    float: none;
+    width: auto;
+    padding-top: 30px
+  }
+
+  .CategoriesPage .topNav:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 15px;
+    border-bottom: 1px solid var(--control-bg)
+  }
+
+  .CategoriesPage .topNav>ul>li,.CategoriesPage .topNav .Dropdown-menu>li {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    vertical-align: top
+  }
+
+  .CategoriesPage .topNav .Dropdown-separator {
+    display: none
+  }
+
+  .CategoriesPage .topNav .Dropdown--select .Dropdown-menu>li>a {
+    padding-left: 25px
+  }
+
+  .CategoriesPage .topNav .Dropdown--select .Dropdown-menu>li>a .icon {
+    margin-left: -25px
+  }
+
+  .CategoriesPage .topNav .affix {
+    position: static
+  }
+
+  .CategoriesPage .topNav:after {
+    display: none
+  }
+
+  .CategoriesPage .topNav>ul>li:first-child {
+    width: 190px
+  }
+  .CategoriesPage .topNavOffset {
+    margin: 15px 0 0
+  }
+}
+
+.topNav--horizontal {
+  padding: 15px 0;
+  white-space: nowrap;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.topNav--horizontal:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 15px;
+  border-bottom: 1px solid var(--control-bg)
+}
+
+.topNav--horizontal>ul>li,.topNav--horizontal .Dropdown-menu>li {
+  display: inline-block;
+  margin: 0 20px 0 0;
+  vertical-align: top
+}
+
+.topNav--horizontal .Dropdown-separator {
+  display: none
+}
+
+.topNav--horizontal .Dropdown--select .Dropdown-menu>li>a {
+  padding-left: 25px
+}
+
+.topNav--horizontal .Dropdown--select .Dropdown-menu>li>a .icon {
+  margin-left: -25px
+}
+
+.topNav--horizontal .affix {
+  position: static
+}
+.active>.TagLinkButton {
+    --topNav-color-active: var(--color)
+}
+
 // Systems
 .TagCategory {
   list-style: none;
@@ -129,11 +320,6 @@
   > .TagCategory {
     margin-bottom: 25px;
   }
-}
-
-.TagCategory-subTagList {
-  display: flex;
-  flex-direction: column;
 }
 
 .TagCategory.SubCategory {
@@ -441,6 +627,14 @@
   }
 }
 
+@media (min-width: 768px) {
+  .TagCategory-content.compactMobile {
+    flex-direction: column
+  }
+  .TagCategory.SubCategory.compactMobile {
+    margin-right: 30px;
+  }
+}
 @media @phone {
   .TagCategoryList > .TagCategory.compactMobile {
     margin-bottom: 15px;
@@ -516,6 +710,7 @@
       flex-direction: row;
       padding: 7px 15px;
       background-color: fade(@categories-sub-color-background, 65%);
+      margin-right: 30px;
     }
     .TagCategory-name {
       font-size: 16px;

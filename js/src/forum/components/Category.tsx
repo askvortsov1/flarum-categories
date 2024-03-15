@@ -89,7 +89,7 @@ export default class Category extends Component<Attrs> {
     items.add(
       'link',
       <Link
-        className={`TagCategory-content TagCategory-content-${tag.slug()}`}
+        className={`TagCategory-content ${app.forum.attribute('categories.compactMobile')? 'compactMobile' : '' } TagCategory-content-${tag.slug()}`}
         style={this.isChild ? {} : { backgroundColor: tag.color() }}
         href={app.route.tag(tag)}
       >

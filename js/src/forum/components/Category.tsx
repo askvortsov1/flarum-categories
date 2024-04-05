@@ -17,6 +17,12 @@ interface Attrs {
   parent: any;
 }
 
+/*
+ * Provide compatibility for Flarum Tag Passwords extension, this is to ensure that locked tag with Password or Group permission has view restriction on latest discussion.
+ * To know if a tag is protected, there is an isUnlocked variable that is specific for this extension.
+ * https://github.com/datlechin/flarum-tag-passwords
+ * 
+ */
 interface TagLocked {
   icon: icon;
   text: string;

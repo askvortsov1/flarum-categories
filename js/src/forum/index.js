@@ -4,22 +4,30 @@ import LinkButton from 'flarum/common/components/LinkButton';
 import Model from 'flarum/common/Model';
 import Tag from 'flarum/tags/models/Tag';
 import CategoriesPage from './components/CategoriesPage';
+import TagsPage from 'flarum/tags/forum/components/TagsPage';
 import Category from './components/Category';
 import LastDiscussionWidget from './components/LastDiscussionWidget';
 import StatWidget from './components/StatWidget';
 
 function pruneIndexNav(items, func) {
-  const isTagsVisible = !app.forum.attribute('categories.keep-tags-nav');
+  const isTagsPageVisible = app.forum.attribute('categories.keepTagsNav');
 
-  if (app.current.matches(CategoriesPage)) {
-    for (const item in items.items) {
-      if (func(item)) {
-        if(item == 'tags' && isTagsVisible) {
-          /*
-           * Tags must be visible on the navibation bar, when the User has selected to keep Tags within the Extension Settings.
-           * Finding all items that begins with 'tag' will also load 'tags', due to custom tag are labelled 'tag1', 'tag2' and so-on
-           */
-        } else {
+  const isCustomTagsHidden = (app.current.matches(CategoriesPage) || app.current.matches(TagsPage));
+  for (const item in items.items) {
+    if (func(item)) {
+      if(item == 'tags') {
+        /*
+         * Tags must be visible on the navibation bar, when the User has selected to keep Tags within the Extension Settings.
+         * Finding all items that begins with 'tag' will also load 'tags', due to custom tag are labelled 'tag1', 'tag2' and so-on
+         */
+        if (!isTagsPageVisible) {
+          items.remove(item);
+        }
+      } else {
+        /*
+         * This is for custom tags, where they should not be visible within CategoriesPage and TagsPage
+         */
+        if (isCustomTagsHidden) {
           items.remove(item);
         }
       }

@@ -1,7 +1,6 @@
 import app from 'flarum/forum/app';
 import Page from 'flarum/common/components/Page';
 import LoadingIndicator from 'flarum/common/components/LoadingIndicator';
-import AffixedSidebar from 'flarum/forum/components/AffixedSidebar';
 import IndexPage from 'flarum/forum/components/IndexPage';
 import listItems from 'flarum/common/helpers/listItems';
 import ItemList from 'flarum/common/utils/ItemList';
@@ -47,7 +46,7 @@ export default class CategoriesPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const classes = app.forum.attribute('categories.fullPageDesktop') ? ['CategoriesPage', 'TagsPage'] : ['CategoriesPage'];
+    const classes = ['CategoriesPage'];
 
     return <div className={classList(classes)}>{this.pageItems().toArray()}</div>;
   }
@@ -59,8 +58,8 @@ export default class CategoriesPage extends Page {
 
     items.add(
       'container',
-      <div className="container">
-        <div className={app.forum.attribute('categories.fullPageDesktop') ? '' : 'sideNavContainer'}>{this.containerItems().toArray()}</div>
+      <div className={app.forum.attribute('categories.fullPageDesktop') ? 'container topNavContainer' : 'container sideNavContainer'}>
+        {this.containerItems().toArray()}
       </div>,
       50
     );
@@ -76,11 +75,9 @@ export default class CategoriesPage extends Page {
 
     items.add(
       'sideNav',
-      <AffixedSidebar>
-        <nav className="CategoriesPage-nav TagsPage-nav IndexPage-nav sideNav">
+        <nav className={app.forum.attribute('categories.fullPageDesktop') ? 'CategoriesPage-nav IndexPage-nav topNav' : 'CategoriesPage-nav IndexPage-nav sideNav'}>
           <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
-        </nav>
-      </AffixedSidebar>,
+        </nav>,
       100
     );
 

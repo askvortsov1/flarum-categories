@@ -59,6 +59,31 @@ app.initializers.add('askvortsov/flarum-categories', () => {
       label: app.translator.trans('askvortsov-categories.admin.labels.small_forum_optimized'),
       help: app.translator.trans('askvortsov-categories.admin.help.small_forum_optimized'),
       type: 'switch',
+    })
+    .registerSetting(() => <legend class="categories-legend">{app.translator.trans('askvortsov-categories.admin.headings.widgets')}<div class="helpText">{app.translator.trans('askvortsov-categories.admin.help.widgets')}</div></legend>)
+    .registerSetting({
+      setting: 'askvortsov-categories.widget-header',
+      label: app.translator.trans('askvortsov-categories.admin.labels.widget_header'),
+      help: app.translator.trans('askvortsov-categories.admin.help.widget_header'),
+      type: 'switch',
+    })
+    .registerSetting({
+      setting: 'askvortsov-categories.widget-left',
+      label: app.translator.trans('askvortsov-categories.admin.labels.widget_left'),
+      help: app.translator.trans('askvortsov-categories.admin.help.widget_left'),
+      type: 'switch',
+    })
+    .registerSetting({
+      setting: 'askvortsov-categories.widget-right',
+      label: app.translator.trans('askvortsov-categories.admin.labels.widget_right'),
+      help: app.translator.trans('askvortsov-categories.admin.help.widget_right'),
+      type: 'switch',
+    })
+    .registerSetting({
+      setting: 'askvortsov-categories.widget-footer',
+      label: app.translator.trans('askvortsov-categories.admin.labels.widget_footer'),
+      help: app.translator.trans('askvortsov-categories.admin.help.widget_footer'),
+      type: 'switch',
     });
 
   extend(BasicsPage.prototype, 'homePageItems', (items) => {

@@ -12,16 +12,27 @@ askvortsov-categories:
       parent_remove_stats: Hide stats for top-level tags?
       parent_remove_last_discussion: Hide most recent discussions for top-level tags?
       small_forum_optimized: Optimize for small forums?
+      widget_header: Header
+      widget_right: Right Sidebar
+      widget_left: Left Sidebar
+      widget_footer: Footer
     help:
       child_bare_icon: Should icons on child categories be displayed without a circular background?
       full_page_desktop: Should the sidebar nav menu be collapsed to a row (like on the traditional tags page)? This will also hide widgets (such as Friends of Flarum Forum Statistics) from the categories page navbar.
       small_forum_optimized:  This will give more accurate discussion/post counts, but will slow medium and large forums dramatically.
+      widgets: Continue to use widgets on the Categories Page, for example Statistics Widget, Custom Html Widget, Forum Stats Widget.
+      widget_header: Example Afrux Forum Widgets (such as News Widget, Forum Stats Widget, Top Posters Widget, Online Users Widget).
+      widget_right: Example Afrux Forum Widgets, Custom Html Widget
+      widget_left: Example Forum Statistics Widget, Afrux Forum Widgets
+      widget_footer: Example Afrux Forum Widgets
+
     headings:
       nav: Navigation
       layout: Layout
       parent_display: Parent Category Display
       child_display: Child Category Display
       performance: Performance
+      widgets: Widgets Display
     title: Categories Settings
 
   forum:

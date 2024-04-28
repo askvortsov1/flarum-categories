@@ -46,7 +46,7 @@ export default class CategoriesPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const classes = ['CategoriesPage'];
+    const classes = ['CategoriesPage', 'container'];
 
     return <div className={classList(classes)}>{this.pageItems().toArray()}</div>;
   }
@@ -56,18 +56,38 @@ export default class CategoriesPage extends Page {
 
     items.add('hero', IndexPage.prototype.hero(), 100);
 
-    items.add(
-      'container',
-      <div className={app.forum.attribute('categories.fullPageDesktop') ? 'container topNavContainer' : 'container sideNavContainer'}>
-        {this.containerItems().toArray()}
-      </div>,
-      50
-    );
+    items.add('container', this.containerItems().toArray(), 50);
 
     return items;
   }
 
   containerItems() {
+    const items = new ItemList();
+    const indexPage = IndexPage.prototype.view();
+    items.add(
+      'container',
+      <div className={app.forum.attribute('categories.fullPageDesktop') ? 'container topNavContainer' : 'container sideNavContainer'}>
+        {this.contentItems().toArray()}
+      </div>,
+      50
+    );
+    // Only check for widget for the header and footer if enable in the settings
+    if ((app.forum.attribute('categories.widgetHeader') || app.forum.attribute('categories.widgetFooter')) && indexPage.children.length > 1 && indexPage.children[1].children) {
+      indexPage.children[1].children.forEach((child, index) => {
+        if (!child.attrs.className) {
+          // Oddly only sideNavContainer className is shown, which should be ignored. The widget must be added by assuming the first is header and the last footer
+          if (app.forum.attribute('categories.widgetHeader') && index == 0) {
+            items.add('header-widget', child, 100);
+          } else if (app.forum.attribute('categories.widgetFooter')) {
+            items.add('footer-widget', child, 0);
+          }
+        }
+      });
+    }
+    return items;
+  }
+
+  contentItems() {
     const items = new ItemList();
 
     const pinned = this.tags.filter((tag) => tag.position() !== null);
@@ -94,7 +114,13 @@ export default class CategoriesPage extends Page {
       </div>,
       50
     );
-
+    // Only check for widget for the right if enable in the settings
+    if (app.forum.attribute('categories.widgetRight')) {
+      const indexPage = IndexPage.prototype.view();
+      if (indexPage.children.length > 1 && indexPage.children[1].children.length > 1 && indexPage.children[1].children[1].children.length === 3) {
+        items.add('widget', indexPage.children[1].children[1].children[2], 0);
+      }
+    }
     return items;
   }
 

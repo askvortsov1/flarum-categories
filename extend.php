@@ -39,7 +39,11 @@ return [
         ->serializeToForum('categories.parentRemoveDescription', 'askvortsov-categories.parent-remove-description', 'boolval')
         ->serializeToForum('categories.parentRemoveStats', 'askvortsov-categories.parent-remove-stats', 'boolval')
         ->serializeToForum('categories.parentRemoveLastDiscussion', 'askvortsov-categories.parent-remove-last-discussion', 'boolval')
-        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval', true),
+        ->serializeToForum('categories.childBareIcon', 'askvortsov-categories.child-bare-icon', 'boolval', true)
+        ->serializeToForum('categories.widgetHeader', 'askvortsov-categories.widget-header', 'boolval', false)
+        ->serializeToForum('categories.widgetRight', 'askvortsov-categories.widget-right', 'boolval', false)
+        ->serializeToForum('categories.widgetLeft', 'askvortsov-categories.widget-left', 'boolval', false)
+        ->serializeToForum('categories.widgetFooter', 'askvortsov-categories.widget-footer', 'boolval', false),
 
     (new Extend\ApiController(ListTagsController::class))
         ->addOptionalInclude('lastPostedDiscussion.lastPostedUser'),

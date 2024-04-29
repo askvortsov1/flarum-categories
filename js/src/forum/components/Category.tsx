@@ -9,6 +9,7 @@ import StatWidget from './StatWidget';
 import LastDiscussionWidget from './LastDiscussionWidget';
 import app from 'flarum/forum/app';
 import classList from 'flarum/common/utils/classList';
+import textContrastClass from 'flarum/common/helpers/textContrastClass';
 
 import type Mithril from 'mithril';
 
@@ -120,10 +121,10 @@ export default class Category extends Component<Attrs> {
 
     const tag = this.tag;
     const children = this.isChild ? [] : sortTags(tag.children() || []);
+    const colorFilter = this.isChild ? 'text-contrast--dark' : textContrastClass(tag.color())
+    items.add('alignStart', <div className={classList('TagCategory-alignStart', colorFilter)}>{this.alignStartItems().toArray()}</div>, 100);
 
-    items.add('alignStart', <div className="TagCategory-alignStart">{this.alignStartItems().toArray()}</div>, 100);
-
-    items.add('alignEnd', <div className="TagCategory-alignEnd">{this.alignEndItems().toArray()}</div>, 50);
+    items.add('alignEnd', <div className={classList('TagCategory-alignEnd', colorFilter)}>{this.alignEndItems().toArray()}</div>, 50);
 
     const childrenInContent = !this.isChild && this.compactMobileMode;
 
@@ -250,7 +251,7 @@ export default class Category extends Component<Attrs> {
     items.add('name', <h4 className="TagCategory-name">{this.tag.name()}</h4>, 15);
 
     if (this.tag.description() && (this.isChild || !app.forum.attribute('categories.parentRemoveDescription'))) {
-      items.add('description', <div className="TagCategory-description">{this.tag.description()}</div>, 10);
+      items.add('description', <div className="TagCategory-description" style={textContrastClass(this.tag.color()) == 'text-contrast--light'? "filter: brightness(85%);": "filter: brightness(200%);"}>{this.tag.description()}</div>, 10);
     }
 
     return items;
@@ -258,7 +259,7 @@ export default class Category extends Component<Attrs> {
 
   statItems() {
     const items = new ItemList();
-
+    const filter = textContrastClass(this.tag.color()) == 'text-contrast--light'? "filter: brightness(85%);": "filter: brightness(200%);";
     if (this.isChild || !app.forum.attribute('categories.parentRemoveStats')) {
       items.add(
         'discussionCount',
@@ -266,6 +267,7 @@ export default class Category extends Component<Attrs> {
           count: Intl.NumberFormat().format(this.tag.discussionCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label'),
           icon: 'fas fa-file-alt',
+          filter: filter,
         }),
         15
       );
@@ -276,6 +278,7 @@ export default class Category extends Component<Attrs> {
           count: Intl.NumberFormat().format(this.tag.postCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label'),
           icon: 'fas fa-comment',
+          filter: filter,
         }),
         10
       );
@@ -292,6 +295,10 @@ export default class Category extends Component<Attrs> {
         'lastDiscussion',
         LastDiscussionWidget.component({
           discussion: this.tag.lastPostedDiscussion(),
+          selectedTag: {
+            tag: this.tag,
+            isChild: this.isChild,
+          }
         }),
         10
       );

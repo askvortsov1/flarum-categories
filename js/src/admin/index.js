@@ -60,6 +60,17 @@ app.initializers.add('askvortsov/flarum-categories', () => {
       help: app.translator.trans('askvortsov-categories.admin.help.small_forum_optimized'),
       type: 'switch',
     })
+    .registerSetting(() => <legend class="categories-legend">{app.translator.trans('askvortsov-categories.admin.headings.colors')}<div class="helpText">{app.translator.trans('askvortsov-categories.admin.help.colors')}</div></legend>)
+    .registerSetting({
+      setting: 'askvortsov-categories.enable-primary-tag-color',
+      label: app.translator.trans('askvortsov-categories.admin.labels.enable_primary_tag_color'),
+      type: 'switch',
+    })
+    .registerSetting({
+      setting: 'askvortsov-categories.enable-primary-child-tag-color',
+      label: app.translator.trans('askvortsov-categories.admin.labels.enable_primary_child_tag_color'),
+      type: 'switch',
+    })
     .registerSetting(() => <legend class="categories-legend">{app.translator.trans('askvortsov-categories.admin.headings.widgets')}<div class="helpText">{app.translator.trans('askvortsov-categories.admin.help.widgets')}</div></legend>)
     .registerSetting({
       setting: 'askvortsov-categories.widget-header',

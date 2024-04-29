@@ -19,6 +19,7 @@ interface Attrs {
   selectedTag: {
     tag: Tag;
     isChild: boolean;
+    isBackgroundTagColored: boolean;
   }
 }
 
@@ -55,8 +56,15 @@ export default class LastDiscussionWidget extends Component<Attrs> {
 
     const discussion = this.attrs.discussion;
     const user = discussion.lastPostedUser();
-    const colorClass = this.attrs.selectedTag.isChild ? 'text-contrast--dark': textContrastClass(this.attrs.selectedTag.tag.color());
-    const colorFilter = colorClass == 'text-contrast--light'? "filter: brightness(85%);": "filter: brightness(200%);";
+    let className = 'auto-color-text';
+
+    if (this.attrs.selectedTag.isChild) {
+      if (this.attrs.selectedTag.isBackgroundTagColored) {
+        className = textContrastClass(this.attrs.selectedTag.tag.color());
+      }
+    } else if (this.attrs.selectedTag.isBackgroundTagColored) {
+      className = textContrastClass(this.attrs.selectedTag.tag.color());
+    }
 
     items.add(
       'avatar',
@@ -68,10 +76,10 @@ export default class LastDiscussionWidget extends Component<Attrs> {
 
     items.add(
       'mainContent',
-      <div class={classList('LastDiscussion-content', colorClass)}>
-        <div class="LastDiscussion-bottomRow" style={colorFilter}>
+      <div class={classList('LastDiscussion-content', className)}>
+        <div class={classList("LastDiscussion-bottomRow", className+'muted' )}>
           {humanTime(discussion.lastPostedAt()!)}{' '}
-          <Link className={classList('LastDiscussion-usernameLink', colorClass)}  href={user ? app.route.user(user) : '#'}>
+          <Link className={classList('LastDiscussion-usernameLink', className+'muted')}  href={user ? app.route.user(user) : '#'}>
             <span style={{ display: 'inline', margin: '0 4px' }} role="presentation">
               |
             </span>

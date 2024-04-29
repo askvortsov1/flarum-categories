@@ -10,13 +10,13 @@ interface Attrs {
   count: number;
   icon: string;
   label: Mithril.Children;
-  filter: string;
+  className: string;
 }
 
 export default class StatWidget extends Component<Attrs> {
   view() {
     return (
-      <div class={classList('StatWidget', { 'Categories-compactMobileModeEnabled': !!app.forum.attribute('categories.compactMobile') })}>
+      <div class={classList('StatWidget', { 'Categories-compactMobileModeEnabled': !!app.forum.attribute('categories.compactMobile') }, this.attrs.className)}>
         {this.content().toArray()}
       </div>
     );
@@ -28,7 +28,7 @@ export default class StatWidget extends Component<Attrs> {
     items.add('count', <div class="StatWidget-count">{this.attrs.count}</div>, 100);
     items.add(
       'label',
-      <div class="StatWidget-label" style={this.attrs.filter}>
+      <div class="StatWidget-label" class={this.attrs.className+'muted'}>
         <span className="Categories-showOnMobile">{icon(this.attrs.icon)}</span>
         <span className="Categories-hideOnMobile">{this.attrs.label}</span>
       </div>,

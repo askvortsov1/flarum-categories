@@ -106,7 +106,7 @@ export default class CategoriesPage extends Page {
       <div className="CategoriesPage-content sideNavOffset">
         <ol className="TagCategoryList">
           {pinned.map((tag) => {
-            return Category.component({ model: tag });
+            return Category.component({ model: tag, enablePrimaryTagColor: app.forum.attribute('categories.enablePrimaryTagColor'), enablePrimaryChildTagColor: app.forum.attribute('categories.enablePrimaryChildTagColor') });
           })}
         </ol>
 

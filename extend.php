@@ -43,7 +43,9 @@ return [
         ->serializeToForum('categories.widgetHeader', 'askvortsov-categories.widget-header', 'boolval', false)
         ->serializeToForum('categories.widgetRight', 'askvortsov-categories.widget-right', 'boolval', false)
         ->serializeToForum('categories.widgetLeft', 'askvortsov-categories.widget-left', 'boolval', false)
-        ->serializeToForum('categories.widgetFooter', 'askvortsov-categories.widget-footer', 'boolval', false),
+        ->serializeToForum('categories.widgetFooter', 'askvortsov-categories.widget-footer', 'boolval', false)
+        ->serializeToForum('categories.enablePrimaryTagColor', 'askvortsov-categories.enable-primary-tag-color', 'boolval', true)
+        ->serializeToForum('categories.enablePrimaryChildTagColor', 'askvortsov-categories.enable-primary-child-tag-color', 'boolval', false),
 
     (new Extend\ApiController(ListTagsController::class))
         ->addOptionalInclude('lastPostedDiscussion.lastPostedUser'),

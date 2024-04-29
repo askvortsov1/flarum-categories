@@ -12,6 +12,8 @@ askvortsov-categories:
       parent_remove_stats: Hide stats for top-level tags?
       parent_remove_last_discussion: Hide most recent discussions for top-level tags?
       small_forum_optimized: Optimize for small forums?
+      enable_primary_tag_color: Enable Primary Tag Color?
+      enable_primary_child_tag_color: Enable Primary Tag Child Color?
       widget_header: Header
       widget_right: Right Sidebar
       widget_left: Left Sidebar
@@ -25,7 +27,7 @@ askvortsov-categories:
       widget_right: Example Afrux Forum Widgets, Custom Html Widget
       widget_left: Example Forum Statistics Widget, Afrux Forum Widgets
       widget_footer: Example Afrux Forum Widgets
-
+      colors: Display page with choice of Tag colous
     headings:
       nav: Navigation
       layout: Layout
@@ -33,6 +35,7 @@ askvortsov-categories:
       child_display: Child Category Display
       performance: Performance
       widgets: Widgets Display
+      colors: Color Scheme
     title: Categories Settings
 
   forum:

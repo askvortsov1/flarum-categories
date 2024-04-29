@@ -1,37 +1,27 @@
 // Variables
+@categories-color-white-muted: darken(white, 11%);
+@categories-color-white-more-muted: darken(white, 25%);
+@categories-color-black-muted: lighten(black, 15%);
+@control-bg-light: darken(@control-bg, 5%);
 
-@categories-color-white: darken(#fff, 2%);
-@categories-color-white-slightly-muted: darken(@categories-color-white, 5%);
-@categories-color-white-muted: darken(@categories-color-white, 11%);
-@categories-color-white-more-muted: darken(@categories-color-white, 25%);
-
-@categories-color-highlighted: @categories-color-white;
-@categories-color-muted: @categories-color-white-muted;
-
-// Dark colors (for nightmode workaround)
-@categories-sub-dark-color-background: lighten(#000, 20%);
-@categories-sub-dark-color-background-hover: lighten(#000, 30%);
-@categories-sub-dark-color-highlighted: darken(@categories-color-white, 5%);
-@categories-sub-dark-color-muted: darken(@categories-color-white, 11%);
-@categories-sub-dark-color-more-muted: darken(@categories-color-white, 25%);
-
-.define-colors(@config-dark-mode);
-.define-colors(false) {
-  @categories-sub-color-background: darken(#fff, 10%);
-  @categories-sub-color-background-hover: darken(#fff, 15%);
-  @categories-sub-color-highlighted: lighten(#000, 5%);
-  @categories-sub-color-muted: lighten(@categories-sub-color-highlighted, 30%);
-  @categories-sub-color-more-muted: lighten(
-    @categories-sub-color-highlighted,
-    75%
-  );
+.text-contrast--lightmuted {
+  color: @categories-color-white-muted;
 }
-.define-colors(true) {
-  @categories-sub-color-background: @categories-sub-dark-color-background;
-  @categories-sub-color-background-hover: @categories-sub-dark-color-background-hover;
-  @categories-sub-color-highlighted: @categories-sub-dark-color-highlighted;
-  @categories-sub-color-muted: @categories-sub-dark-color-muted;
-  @categories-sub-color-more-muted: @categories-sub-dark-color-more-muted;
+
+.text-contrast--darkmuted {
+  color: @categories-color-black-muted;
+}
+
+.auto-child-color {
+  color: @control-bg-light;
+}
+
+.auto-color-text {
+  color: @text-color;
+}
+
+.auto-color-textmuted {
+  color: @muted-color;
 }
 
 .Categories-showOnMobile {
@@ -250,7 +240,7 @@
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
-    background-color: @primary-color;
+    background-color: @control-bg;
     text-decoration: none !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18),
       0 3px 10px 0 rgba(0, 0, 0, 0.15);
@@ -323,7 +313,7 @@
   .TagCategory-content {
     padding: 10px 20px;
     margin: 5px 0;
-    background-color: @categories-sub-color-background;
+    background-color: @control-bg-light;
     box-shadow: 0 2px 4px 0em rgba(0, 0, 0, 0.04),
       0 3px 10px 0 rgba(0, 0, 0, 0.07);
 
@@ -331,19 +321,6 @@
       font-size: 18px;
     }
 
-    .TagCategory-icon {
-      .CategoryIcon {
-        color: @categories-sub-color-background;
-      }
-
-      .CategoryIcon.NoBackgroundCategoryIcon {
-        color: @categories-sub-color-highlighted;
-      }
-    }
-
-    &.hover:hover {
-      background-color: @categories-sub-color-background-hover;
-    }
   }
 
   &:first-child {
@@ -379,7 +356,7 @@
 
 .TagCategory.SubCategory {
   .StatWidget {
-    border-right: 2px solid @categories-sub-color-more-muted;
+    border-right: 2px solid @categories-color-white-more-muted;
     display: flex;
   }
 }
@@ -609,6 +586,7 @@
   .ParentCategory.compactMobile {
     > .TagCategory-content {
       padding: 10px 15px;
+      background-color: @control-bg;
 
       > :nth-child(1) {
         order: 1;
@@ -666,7 +644,7 @@
     .TagCategory-content {
       flex-direction: row;
       padding: 7px 15px;
-      background-color: fade(@categories-sub-color-background, 65%);
+      background-color: @control-bg-light;
       margin-right: 30px;
     }
     .TagCategory-name {

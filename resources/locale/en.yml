@@ -27,7 +27,7 @@ askvortsov-categories:
       widget_right: Example Afrux Forum Widgets, Custom Html Widget
       widget_left: Example Forum Statistics Widget, Afrux Forum Widgets
       widget_footer: Example Afrux Forum Widgets
-      colors: Display page with choice of Tag colous
+      colors: Display page with the Tags chosen colors
     headings:
       nav: Navigation
       layout: Layout

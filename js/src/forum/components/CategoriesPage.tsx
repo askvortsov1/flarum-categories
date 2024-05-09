@@ -46,9 +46,7 @@ export default class CategoriesPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const classes = ['CategoriesPage', 'container'];
-
-    return <div className={classList(classes)}>{this.pageItems().toArray()}</div>;
+    return <div className='CategoriesPage'>{this.pageItems().toArray()}</div>;
   }
 
   pageItems() {
@@ -56,7 +54,7 @@ export default class CategoriesPage extends Page {
 
     items.add('hero', IndexPage.prototype.hero(), 100);
 
-    items.add('container', this.containerItems().toArray(), 50);
+    items.add('container', <div class="container">{this.containerItems().toArray()}</div>, 50);
 
     return items;
   }
@@ -64,13 +62,8 @@ export default class CategoriesPage extends Page {
   containerItems() {
     const items = new ItemList();
     const indexPage = IndexPage.prototype.view();
-    items.add(
-      'container',
-      <div className={app.forum.attribute('categories.fullPageDesktop') ? 'container topNavContainer' : 'container sideNavContainer'}>
-        {this.contentItems().toArray()}
-      </div>,
-      50
-    );
+    items.add("sideNavContainer", <div class={app.forum.attribute('categories.fullPageDesktop') ? 'topNavContainer' : 'sideNavContainer'}>{this.contentItems().toArray()}</div>, 50);
+
     // Only check for widget for the header and footer if enable in the settings
     if ((app.forum.attribute('categories.widgetHeader') || app.forum.attribute('categories.widgetFooter')) && indexPage.children.length > 1 && indexPage.children[1].children) {
       indexPage.children[1].children.forEach((child, index) => {

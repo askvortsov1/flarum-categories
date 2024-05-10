@@ -5,12 +5,48 @@ import IndexPage from 'flarum/forum/components/IndexPage';
 import listItems from 'flarum/common/helpers/listItems';
 import ItemList from 'flarum/common/utils/ItemList';
 import extractText from 'flarum/common/utils/extractText';
-import classList from 'flarum/common/utils/classList';
-
 import sortTags from 'flarum/tags/utils/sortTags';
 import tagLabel from 'flarum/tags/helpers/tagLabel';
 
 import Category from './Category';
+
+/*
+* Used for finding the correct location of widget containers, widget has undefined className which is used to compare and find.
+* position types:
+* POSITION_ANY = No position check (Used for Right Side Widget)
+* POSITION_FIRST = First container only (Used for Header Widget)
+* POSITION_AFTER_FIRST = After the first container (Used for the Footer Widget)
+*/
+const POSITION_ANY = 0;
+const POSITION_FIRST = 1;
+const POSITION_AFTER_FIRST = 2;
+
+function findWidgetContainer(vdom, classNames, classNameIndex, position) {
+  for (let i = 0; i < vdom.children.length; i++) {
+    const child = vdom.children[i];
+    const findClassName = classNames[classNameIndex];
+    const isClassNameMatch = child.attrs.className? child.attrs.className.indexOf(findClassName) !== -1: false;
+    if (isClassNameMatch || findClassName == child.attrs.className) {
+      let isValid = false;
+      if (position === POSITION_ANY || isClassNameMatch) {
+        isValid = true;
+      } else if (position === POSITION_FIRST && i == 0) {
+        isValid = true;
+      } else if (position === POSITION_AFTER_FIRST && i > 0) {
+        isValid = true;
+      }
+      if (isValid) {
+        classNameIndex += 1;
+        if (classNameIndex == classNames.length) {
+          // Found the last container from the classNames array
+          return child;
+        } else {
+          return findWidgetContainer(child, classNames, classNameIndex, position);
+        }
+      }
+    }
+  }
+}
 
 export default class CategoriesPage extends Page {
   tags!: any[];
@@ -62,20 +98,22 @@ export default class CategoriesPage extends Page {
   containerItems() {
     const items = new ItemList();
     const indexPage = IndexPage.prototype.view();
+    // Only check for header widget if enable in the settings
+    if (app.forum.attribute('categories.widgetHeader')) {
+      const foundHeaderWidget= findWidgetContainer(indexPage, ['container', undefined], 0, POSITION_FIRST);
+      if (foundHeaderWidget) {
+        items.add('header-widget', foundHeaderWidget, 100);
+      }
+    }
+
     items.add("sideNavContainer", <div class={app.forum.attribute('categories.fullPageDesktop') ? 'topNavContainer' : 'sideNavContainer'}>{this.contentItems().toArray()}</div>, 50);
 
-    // Only check for widget for the header and footer if enable in the settings
-    if ((app.forum.attribute('categories.widgetHeader') || app.forum.attribute('categories.widgetFooter')) && indexPage.children.length > 1 && indexPage.children[1].children) {
-      indexPage.children[1].children.forEach((child, index) => {
-        if (!child.attrs.className) {
-          // Oddly only sideNavContainer className is shown, which should be ignored. The widget must be added by assuming the first is header and the last footer
-          if (app.forum.attribute('categories.widgetHeader') && index == 0) {
-            items.add('header-widget', child, 100);
-          } else if (app.forum.attribute('categories.widgetFooter')) {
-            items.add('footer-widget', child, 0);
-          }
-        }
-      });
+    // Only check for footer widget if enable in the settings
+    if (app.forum.attribute('categories.widgetFooter')) {
+      const foundFooterWidget= findWidgetContainer(indexPage, ['container', undefined], 0, POSITION_AFTER_FIRST);
+      if (foundFooterWidget) {
+        items.add('footer-widget', foundFooterWidget, 0);
+      }
     }
     return items;
   }
@@ -107,11 +145,12 @@ export default class CategoriesPage extends Page {
       </div>,
       50
     );
-    // Only check for widget for the right if enable in the settings
+    // Only check for right side widget if enable in the settings
     if (app.forum.attribute('categories.widgetRight')) {
       const indexPage = IndexPage.prototype.view();
-      if (indexPage.children.length > 1 && indexPage.children[1].children.length > 1 && indexPage.children[1].children[1].children.length === 3) {
-        items.add('widget', indexPage.children[1].children[1].children[2], 0);
+      const foundWidget= findWidgetContainer(indexPage, ['container','sideNavContainer', undefined], 0, POSITION_ANY);
+      if (foundWidget) {
+        items.add('widget', foundWidget, 0);
       }
     }
     return items;

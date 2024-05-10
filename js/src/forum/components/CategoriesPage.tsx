@@ -5,12 +5,48 @@ import IndexPage from 'flarum/forum/components/IndexPage';
 import listItems from 'flarum/common/helpers/listItems';
 import ItemList from 'flarum/common/utils/ItemList';
 import extractText from 'flarum/common/utils/extractText';
-import classList from 'flarum/common/utils/classList';
-
 import sortTags from 'flarum/tags/utils/sortTags';
 import tagLabel from 'flarum/tags/helpers/tagLabel';
 
 import Category from './Category';
+
+/*
+* Used for finding the correct location of widget containers, widget has undefined className which is used to compare and find.
+* position types:
+* POSITION_ANY = No position check (Used for Right Side Widget)
+* POSITION_FIRST = First container only (Used for Header Widget)
+* POSITION_AFTER_FIRST = After the first container (Used for the Footer Widget)
+*/
+const POSITION_ANY = 0;
+const POSITION_FIRST = 1;
+const POSITION_AFTER_FIRST = 2;
+
+function findWidgetContainer(vdom, classNames, classNameIndex, position) {
+  for (let i = 0; i < vdom.children.length; i++) {
+    const child = vdom.children[i];
+    const findClassName = classNames[classNameIndex];
+    const isClassNameMatch = child.attrs.className? child.attrs.className.indexOf(findClassName) !== -1: false;
+    if (isClassNameMatch || findClassName == child.attrs.className) {
+      let isValid = false;
+      if (position === POSITION_ANY || isClassNameMatch) {
+        isValid = true;
+      } else if (position === POSITION_FIRST && i == 0) {
+        isValid = true;
+      } else if (position === POSITION_AFTER_FIRST && i > 0) {
+        isValid = true;
+      }
+      if (isValid) {
+        classNameIndex += 1;
+        if (classNameIndex == classNames.length) {
+          // Found the last container from the classNames array
+          return child;
+        } else {
+          return findWidgetContainer(child, classNames, classNameIndex, position);
+        }
+      }
+    }
+  }
+}
 
 export default class CategoriesPage extends Page {
   tags!: any[];
@@ -46,9 +82,7 @@ export default class CategoriesPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const classes = ['CategoriesPage'];
-
-    return <div className={classList(classes)}>{this.pageItems().toArray()}</div>;
+    return <div className='CategoriesPage'>{this.pageItems().toArray()}</div>;
   }
 
   pageItems() {
@@ -56,18 +90,35 @@ export default class CategoriesPage extends Page {
 
     items.add('hero', IndexPage.prototype.hero(), 100);
 
-    items.add(
-      'container',
-      <div className={app.forum.attribute('categories.fullPageDesktop') ? 'container topNavContainer' : 'container sideNavContainer'}>
-        {this.containerItems().toArray()}
-      </div>,
-      50
-    );
+    items.add('container', <div class="container">{this.containerItems().toArray()}</div>, 50);
 
     return items;
   }
 
   containerItems() {
+    const items = new ItemList();
+    const indexPage = IndexPage.prototype.view();
+    // Only check for header widget if enable in the settings
+    if (app.forum.attribute('categories.widgetHeader')) {
+      const foundHeaderWidget= findWidgetContainer(indexPage, ['container', undefined], 0, POSITION_FIRST);
+      if (foundHeaderWidget) {
+        items.add('header-widget', foundHeaderWidget, 100);
+      }
+    }
+
+    items.add("sideNavContainer", <div class={app.forum.attribute('categories.fullPageDesktop') ? 'topNavContainer' : 'sideNavContainer'}>{this.contentItems().toArray()}</div>, 50);
+
+    // Only check for footer widget if enable in the settings
+    if (app.forum.attribute('categories.widgetFooter')) {
+      const foundFooterWidget= findWidgetContainer(indexPage, ['container', undefined], 0, POSITION_AFTER_FIRST);
+      if (foundFooterWidget) {
+        items.add('footer-widget', foundFooterWidget, 0);
+      }
+    }
+    return items;
+  }
+
+  contentItems() {
     const items = new ItemList();
 
     const pinned = this.tags.filter((tag) => tag.position() !== null);
@@ -86,7 +137,7 @@ export default class CategoriesPage extends Page {
       <div className="CategoriesPage-content sideNavOffset">
         <ol className="TagCategoryList">
           {pinned.map((tag) => {
-            return Category.component({ model: tag });
+            return Category.component({ model: tag, enablePrimaryTagColor: app.forum.attribute('categories.enablePrimaryTagColor'), enablePrimaryChildTagColor: app.forum.attribute('categories.enablePrimaryChildTagColor') });
           })}
         </ol>
 
@@ -94,7 +145,14 @@ export default class CategoriesPage extends Page {
       </div>,
       50
     );
-
+    // Only check for right side widget if enable in the settings
+    if (app.forum.attribute('categories.widgetRight')) {
+      const indexPage = IndexPage.prototype.view();
+      const foundWidget= findWidgetContainer(indexPage, ['container','sideNavContainer', undefined], 0, POSITION_ANY);
+      if (foundWidget) {
+        items.add('widget', foundWidget, 0);
+      }
+    }
     return items;
   }
 

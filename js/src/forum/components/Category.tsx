@@ -9,12 +9,15 @@ import StatWidget from './StatWidget';
 import LastDiscussionWidget from './LastDiscussionWidget';
 import app from 'flarum/forum/app';
 import classList from 'flarum/common/utils/classList';
+import textContrastClass from 'flarum/common/helpers/textContrastClass';
 
 import type Mithril from 'mithril';
 
 interface Attrs {
   model: any;
   parent: any;
+  enablePrimaryTagColor: boolean;
+  enablePrimaryChildTagColor: boolean;
 }
 
 /*
@@ -92,11 +95,19 @@ export default class Category extends Component<Attrs> {
 
     const children = this.isChild ? [] : sortTags(tag.children() || []);
 
+    let style: Record<string, unknown> = {};
+    if (this.isChild) {
+      if (this.attrs.enablePrimaryChildTagColor) {
+        style.backgroundColor = this.tag.color();
+      }
+    } else if (this.attrs.enablePrimaryTagColor) {
+      style.backgroundColor = this.tag.color();
+    }
     items.add(
       'link',
       <Link
         className={`TagCategory-content ${app.forum.attribute('categories.compactMobile')? 'compactMobile' : '' } TagCategory-content-${tag.slug()}`}
-        style={this.isChild ? {} : { backgroundColor: tag.color() }}
+        style={style}
         href={app.route.tag(tag)}
       >
         {this.contentItems().toArray()}
@@ -107,7 +118,7 @@ export default class Category extends Component<Attrs> {
     if (!this.compactMobileMode && !this.isChild) {
       items.add(
         'children',
-        <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ model: child, parent: this })])}</ol>,
+        <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ model: child, parent: this, enablePrimaryChildTagColor: this.attrs.enablePrimaryChildTagColor})])}</ol>,
         10
       );
     }
@@ -118,19 +129,23 @@ export default class Category extends Component<Attrs> {
   contentItems() {
     const items = new ItemList();
 
-    const tag = this.tag;
-    const children = this.isChild ? [] : sortTags(tag.children() || []);
+    const children = this.isChild ? [] : sortTags(this.tag.children() || []);
 
-    items.add('alignStart', <div className="TagCategory-alignStart">{this.alignStartItems().toArray()}</div>, 100);
+    let className = 'auto-color-text';
+    if (this.attrs.enablePrimaryTagColor || (this.isChild && this.attrs.enablePrimaryChildTagColor)) {
+      className =  textContrastClass(this.tag.color());
+    }
 
-    items.add('alignEnd', <div className="TagCategory-alignEnd">{this.alignEndItems().toArray()}</div>, 50);
+    items.add('alignStart', <div className={classList('TagCategory-alignStart', className)}>{this.alignStartItems().toArray()}</div>, 100);
+
+    items.add('alignEnd', <div className={classList('TagCategory-alignEnd', className)}>{this.alignEndItems().toArray()}</div>, 50);
 
     const childrenInContent = !this.isChild && this.compactMobileMode;
 
     if (childrenInContent && !this.collapsed) {
       items.add(
         'children',
-        <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ model: child, parent: this })])}</ol>,
+        <ol className="TagCategory-subTagList">{children.map((child) => [Category.component({ model: child, parent: this, enablePrimaryChildTagColor: this.attrs.enablePrimaryChildTagColor})])}</ol>,
         10
       );
     }
@@ -141,10 +156,16 @@ export default class Category extends Component<Attrs> {
   alignStartItems() {
     const items = new ItemList();
 
-    const tag = this.tag;
-    const children = this.isChild ? [] : sortTags(tag.children() || []);
-
-    items.add('icon', <span className="TagCategory-icon">{this.iconItems().toArray()}</span>, 100);
+    const children = this.isChild ? [] : sortTags(this.tag.children() || []);
+    let style: Record<string, unknown> = {};
+    if (this.isChild) {
+      if (!this.attrs.enablePrimaryChildTagColor) {
+        style.color = this.tag.color();
+      }
+    } else if (!this.attrs.enablePrimaryTagColor) {
+      style.color = this.tag.color();
+    }
+    items.add('icon', <span className='TagCategory-icon' style={style}>{this.iconItems().toArray()}</span>, 100);
 
     items.add('main', <div className="TagCategory-main">{this.mainItems().toArray()}</div>, 50);
 
@@ -214,24 +235,31 @@ export default class Category extends Component<Attrs> {
     if (this.tag.icon() && this.isChild) {
       const style: Record<string, unknown> = {};
 
-      let iconClasses = 'fa-stack-1x CategoryIcon';
+      let iconClasses = ['fa-stack-1x CategoryIcon'];
 
       if (app.forum.attribute('categories.childBareIcon')) {
-        iconClasses += ' NoBackgroundCategoryIcon';
-        style.color = '#fafafa';
+        if (this.attrs.enablePrimaryChildTagColor) {
+          style.color = this.tag.color();
+        } else {
+          iconClasses.push('NoBackgroundCategoryIcon', 'auto-child-color');
+        }
       } else {
-        style.color = this.tag.color();
+        if (this.attrs.enablePrimaryChildTagColor) {
+          iconClasses.push(textContrastClass(this.tag.color()));
+        } else {
+          style.color = this.tag.color();
+        }
       }
 
-      const classes = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';
+      const className = this.compactMobileMode ? 'fa-stack fa-1x' : 'fa-stack fa-2x';
 
       items.add(
         'icon',
-        <span className={classes}>
+        <span className={className}>
           {!!app.forum.attribute('categories.childBareIcon') && (
-            <i className="fa fa-circle fa-stack-2x icon-background" style={{ color: this.tag.color() }}></i>
+            <i className="fa fa-circle fa-stack-2x icon-background" style={this.attrs.enablePrimaryChildTagColor?{}:{ color: this.tag.color() }}></i>
           )}
-          {icon(this.tag.icon(), { className: iconClasses, style: style })}
+          {icon(this.tag.icon(), { className: classList(iconClasses), style: style })}
         </span>,
         10
       );
@@ -248,9 +276,17 @@ export default class Category extends Component<Attrs> {
     const items = new ItemList();
 
     items.add('name', <h4 className="TagCategory-name">{this.tag.name()}</h4>, 15);
-
+    
+    let className = 'auto-color-text';
+    if (this.isChild) {
+      if (this.attrs.enablePrimaryChildTagColor) {
+        className = textContrastClass(this.tag.color())+'muted';
+      }
+    } else if (this.attrs.enablePrimaryTagColor) {
+      className = textContrastClass(this.tag.color())+'muted';
+    }
     if (this.tag.description() && (this.isChild || !app.forum.attribute('categories.parentRemoveDescription'))) {
-      items.add('description', <div className="TagCategory-description">{this.tag.description()}</div>, 10);
+      items.add('description', <div className={classList('TagCategory-description', className)}>{this.tag.description()}</div>, 10);
     }
 
     return items;
@@ -258,7 +294,15 @@ export default class Category extends Component<Attrs> {
 
   statItems() {
     const items = new ItemList();
-
+    let className = 'auto-color-text';
+    
+    if (this.isChild) {
+      if (this.attrs.enablePrimaryChildTagColor) {
+        className = textContrastClass(this.tag.color());
+      }
+    } else if (this.attrs.enablePrimaryTagColor) {
+      className = textContrastClass(this.tag.color());
+    }
     if (this.isChild || !app.forum.attribute('categories.parentRemoveStats')) {
       items.add(
         'discussionCount',
@@ -266,6 +310,7 @@ export default class Category extends Component<Attrs> {
           count: Intl.NumberFormat().format(this.tag.discussionCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.discussion_label'),
           icon: 'fas fa-file-alt',
+          className: className,
         }),
         15
       );
@@ -276,6 +321,7 @@ export default class Category extends Component<Attrs> {
           count: Intl.NumberFormat().format(this.tag.postCount()),
           label: app.translator.trans('askvortsov-categories.forum.stat-widgets.post_label'),
           icon: 'fas fa-comment',
+          className: className,
         }),
         10
       );
@@ -292,6 +338,11 @@ export default class Category extends Component<Attrs> {
         'lastDiscussion',
         LastDiscussionWidget.component({
           discussion: this.tag.lastPostedDiscussion(),
+          selectedTag: {
+            tag: this.tag,
+            isChild: this.isChild,
+            isBackgroundTagColored: this.isChild? this.attrs.enablePrimaryChildTagColor: this.attrs.enablePrimaryTagColor
+          }
         }),
         10
       );

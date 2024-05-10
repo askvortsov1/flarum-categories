@@ -1,6 +1,5 @@
 import app from 'flarum/forum/app';
 import Component from 'flarum/common/Component';
-import avatar from 'flarum/common/helpers/avatar';
 import username from 'flarum/common/helpers/username';
 import humanTime from 'flarum/common/helpers/humanTime';
 import { truncate } from 'flarum/common/utils/string';
@@ -8,11 +7,11 @@ import Link from 'flarum/common/components/Link';
 import UserCard from 'flarum/forum/components/UserCard';
 import type Discussion from 'flarum/common/models/Discussion';
 import ItemList from 'flarum/common/utils/ItemList';
-import extractText from 'flarum/common/utils/extractText';
 import Tag from 'flarum/tags/models/Tag';
 import classList from 'flarum/common/utils/classList';
 import type Mithril from 'mithril';
 import textContrastClass from 'flarum/common/helpers/textContrastClass';
+import lastDiscussionAvatar from '../helpers/lastDiscussionAvatar';
 
 interface Attrs {
   discussion: Discussion;
@@ -68,9 +67,7 @@ export default class LastDiscussionWidget extends Component<Attrs> {
 
     items.add(
       'avatar',
-      <Link className="LastDiscussion-avatar" href={user ? app.route.user(user) : '#'} aria-label={extractText(username(user))}>
-        {!!user && avatar(user)}
-      </Link>,
+      lastDiscussionAvatar(user, "LastDiscussion-avatar"),
       100
     );
 

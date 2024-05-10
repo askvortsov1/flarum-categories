@@ -1,4 +1,3 @@
-import icon from 'flarum/common/helpers/icon';
 import avatar from 'flarum/common/helpers/avatar';
 import Link from 'flarum/common/components/Link';
 import username from 'flarum/common/helpers/username';
@@ -13,7 +12,7 @@ export default function lastDiscussionAvatar(user, className) {
   }
   if (!avatarDisplay) {
     avatarName = "Anonymous";
-    avatarDisplay = <span class="Avatar Avatar--anonymous" loading="lazy">{icon('fas fa-question')}</span>;
+    avatarDisplay = <span class="Avatar Avatar--anonymous" loading="lazy">?</span>;
   }
 
   return <Link className={className} href={user ? app.route.user(user) : '#'} aria-label={avatarName}>
